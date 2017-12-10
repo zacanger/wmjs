@@ -24,12 +24,14 @@ To make this available to your session manager, put something like this in
 Encoding=UTF-8
 Name=wmjs
 Comment=Window manger in node
-Exec=wmjs
+Exec=/path/to/wmjs
 Icon=wmjs
 Type=XSession
 X-LightDM-DesktopName=wmjs
 DesktopNames=wmjs
 ```
+
+Where `/path/to/wmjs` is something like `/usr/local/bin/wmjs` (see `npm bin -g`).
 
 ## Prior Art
 
@@ -40,4 +42,4 @@ have a long list here.
 
 ## License
 
-[WTFPL](./LICENSE.md)
+[MIT](./LICENSE.md)
