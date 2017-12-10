@@ -4,6 +4,9 @@ X window manager for Node.
 
 ![screenshot](http://zacanger.com/wmjs.png)
 
+* [Changelog](./CHANGES.md)
+* [Roadmap](./TODO.md)
+
 --------
 
 ## Installation
