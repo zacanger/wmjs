@@ -15,3 +15,5 @@ Pretty much everything.
   * Could be based on keybinds, not true tiling, just snapping
   * If true tiling, resize with keybinds, swapping panes
   * Saved layouts? (Probably not)
+* Use super key for everything (snapping, triggering)
+* dmenu_run and x-terminal-emulator bound by default
