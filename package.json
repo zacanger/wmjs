@@ -11,8 +11,10 @@
   "main": "index.js",
   "bin": "./index.js",
   "scripts": {
+    "preversion": "npm run test",
     "start": "node index",
-    "test": ""
+    "test": "npm run test:lint",
+    "test:lint": "eslint -c .eslintrc.json index.js src"
   },
   "homepage": "https://github.com/zacanger/wmjs#readme",
   "repository": {
@@ -22,14 +24,23 @@
   "bugs": "https://github.com/zacanger/wmjs/issues",
   "keywords": [
     "window-manager",
+    "wm",
     "x",
-    "x11",
-    "wm"
+    "x11"
   ],
   "dependencies": {
     "x11": "2.3.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "babel-eslint": "8.0.3",
+    "eslint": "4.13.0",
+    "eslint-config-jane": "0.7.1",
+    "eslint-plugin-babel": "4.1.2",
+    "eslint-plugin-import": "2.8.0",
+    "eslint-plugin-node": "5.2.1",
+    "eslint-plugin-promise": "3.6.0",
+    "eslint-plugin-unicorn": "3.0.0"
+  },
   "engines": {
     "node": ">=8.0.0"
   }
