@@ -2,7 +2,7 @@
 
 X window manager for Node.
 
-![screenshot](http://zacanger.com/wmjs.png)
+![screenshot](http://zacanger.com/assets/wmjs.png)
 
 * [Changelog](./CHANGES.md)
 * [Roadmap](./TODO.md)
