@@ -1,0 +1,32 @@
+{
+  "name": "wmjs",
+  "description": "wmjs",
+  "version": "0.0.1",
+  "author": {
+    "name": "Zac Anger",
+    "email": "zac@zacanger.com",
+    "url": "http://zacanger.com"
+  },
+  "license": "WTFPL",
+  "main": "index.js",
+  "bin": "./index.js",
+  "scripts": {
+    "start": "node index",
+    "test": ""
+  },
+  "homepage": "https://github.com/zacanger/wmjs#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zacanger/wmjs.git"
+  },
+  "bugs": "https://github.com/zacanger/wmjs/issues",
+  "keywords": [
+    "",
+    "wmjs"
+  ],
+  "dependencies": {},
+  "devDependencies": {},
+  "engines": {
+    "node": ">=8.0.0"
+  }
+}
