@@ -43,6 +43,25 @@ Right now, this is mostly a fork of
 implementation of [tinywm](http://incise.org/tinywm.html) in JS. I'll probably
 have a long list here.
 
+## Recommended Applications
+
+You can use any programs you like, but these fit well with minimalistic window
+managers.
+
+* Browser: Qutebrowser
+  * Alternatives: uzbl, dwb
+  * More extreme: w3m, Lynx, elinks
+* File manager: Ranger
+  * Alternatives: noice, rover, nnn
+* Editor: Neovim
+  * Alternatives: Vim, vi, Emacs
+* Audio player: Angrplayer
+  * Alternatives: moc, cmus, mplayer
+* Video: mpv
+  * Alternatives: mplayer
+* Terminal emulator: st
+  * Alternatives: urxvt, rxvt, xterm
+
 ## License
 
 [MIT](./LICENSE.md)
