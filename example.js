@@ -15,9 +15,9 @@ const events = x11.eventMask.Button1Motion |
 let frames = {}
 let dragStart = null
 
-function manageWindow (wid) {
+const manageWindow = (wid) => {
   console.log('MANAGE WINDOW: ' + wid)
-  X.GetWindowAttributes(wid, function (err, attrs) {
+  X.GetWindowAttributes(wid, (err, attrs) => {
     if (attrs[8]) { // override-redirect flag
       console.log("don't manage")
       X.MapWindow(wid)
@@ -96,7 +96,6 @@ x11.createClient((err, display) => {
       tree.children.forEach(manageWindow)
     })
 
-    /*
     X.bggrad = X.AllocID()
     Render.LinearGradient(X.bggrad, [-10, 0], [0, 1000],
       // RenderRadialGradient(pic_grad, [0,0], [1000,100], 10, 1000,
@@ -108,11 +107,10 @@ x11.createClient((err, display) => {
         // [0.5, [0xffff, 0, 0xffff, 0x4000] ] ,
         [1, [0xffff, 0xffff, 0, 0xffffff] ]
       ])
-    */
 
     X.rootpic = X.AllocID()
     Render.CreatePicture(X.rootpic, root, Render.rgb24)
-    exec('tt')
+    exec('dmenu_run')
   })
 }).on('error', (err) => {
   console.error(err)

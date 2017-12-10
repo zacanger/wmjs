@@ -1,3 +1,4 @@
 #!/bin/sh
 
-killall Xephyr && killall node
+killall node
+killall Xephyr
