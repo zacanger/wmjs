@@ -2,6 +2,8 @@
 
 X window manager for Node.
 
+![screenshot](http://zacanger.com/wmjs.png)
+
 --------
 
 ## Installation
