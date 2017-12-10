@@ -29,7 +29,8 @@
     "x11"
   ],
   "dependencies": {
-    "x11": "2.3.0"
+    "x11": "2.3.0",
+    "x11-keyboard": "0.1.0"
   },
   "devDependencies": {
     "babel-eslint": "8.0.3",
