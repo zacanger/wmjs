@@ -49,7 +49,7 @@ You can use any programs you like, but these fit well with minimalistic window
 managers.
 
 * Browser: Qutebrowser
-  * Alternatives: uzbl, dwb
+  * Alternatives: min, uzbl, dwb
   * More extreme: w3m, Lynx, elinks
 * File manager: Ranger
   * Alternatives: noice, rover, nnn
