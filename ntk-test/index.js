@@ -1,6 +1,8 @@
 const ntk = require('ntk')
 const exec = require('child_process').execSync
 
+const dir = (o) => console.dir(o, { colors: true })
+
 const blowUp = (err) => {
   console.error(err)
   process.exit(1)
@@ -8,13 +10,23 @@ const blowUp = (err) => {
 
 ntk.createClient((err, app) => {
   if (err) blowUp(err)
+  // lol this
+  try {
+    exec('dmenu_run')
+  } catch (_) {
+    try {
+      exec('x-terminal-emulator')
+    } catch (_) {
+      exec('xterm')
+    }
+  }
   app.rootWindow()
     .on('configure_request', (ev) => {
-      exec('tt')
+      // ?
     })
     .on('map_request', (ev) => {
       ev.window.map()
     })
-    .on('keydown', console.dir)
-    .on('mousedown', console.dir)
+    .on('keydown', dir)
+    .on('mousedown', dir)
 })
