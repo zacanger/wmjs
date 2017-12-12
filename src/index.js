@@ -4,6 +4,8 @@ const EventEmitter = require('events').EventEmitter
 const dir = (o) => console.dir(o, { colors: true })
 const keyboard = require('x11-keyboard')
 
+const util = require('./util')
+
 const MOD_1_MASK = 1 << 3 // TODO: This won't be true for everyone
 const KEYSYM_F1 = 67
 const GRAB_MODE_ASYNC = 1
@@ -13,15 +15,10 @@ let start
 let attr
 let X
 
-const blowUp = (err) => {
-  console.error(err)
-  process.exit(1)
-}
-
 keyboard.on('key.down:ctrl+enter', console.dir)
 
 x11.createClient((err, display) => {
-  if (err) blowUp(err)
+  if (err) util.blowUp(err)
   X = global.X = display.client
 
   const root = display.screen[0].root
@@ -97,7 +94,7 @@ x11.createClient((err, display) => {
     } */
   })
 })
-  .on('error', blowUp)
+  .on('error', util.blowUp)
   .on('event', (event) => {
     dir(event)
     if (event.name === 'KeyPress' && (event.xkey.keycode || event.keycode)) {
@@ -108,7 +105,7 @@ x11.createClient((err, display) => {
       X.RaiseWindow(event.child)
     } else if (event.name === 'ButtonPress' && event.child !== 0) {
       X.GetGeometry(event.child, (err, attributes) => {
-        if (err) blowUp(err)
+        if (err) util.blowUp(err)
         start = event
         attr = attributes
       })
