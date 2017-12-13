@@ -20,13 +20,15 @@ ntk.createClient((err, app) => {
       exec('xterm')
     }
   }
-  app.rootWindow()
-    .on('configure_request', (ev) => {
-      // ?
-    })
-    .on('map_request', (ev) => {
-      ev.window.map()
-    })
-    .on('keydown', dir)
-    .on('mousedown', dir)
+  const wm = app.rootWindow()
+  wm.on('configure_request', (ev) => { // eslint-disable-line no-unused-vars
+    // ?
+  })
+  wm.on('map_request', (ev) => {
+    ev.window.map()
+  })
+  wm.on('keydown', dir)
+  wm.on('mousedown', dir)
+  wm.on('mousemove', dir)
+  wm.map()
 })
