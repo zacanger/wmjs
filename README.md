@@ -1,6 +1,7 @@
 # wmjs
 
-X window manager for Node.
+X window manager for Node, emphasizing Configuration Over Convention, because if
+you wanted the same experience as everyone else you'd be using a Mac.
 
 ![screenshot](http://zacanger.com/assets/wmjs.png)
 
