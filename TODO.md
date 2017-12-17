@@ -17,3 +17,5 @@ Pretty much everything.
   * Saved layouts? (Probably not)
 * Use super key for everything (snapping, triggering)
 * dmenu_run and x-terminal-emulator bound by default
+* emphasize that wmjs is Configuration over Convention(TM), because if you
+  wanted the same window manager as everyone else you'd be using windows.
