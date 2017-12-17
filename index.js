@@ -5,4 +5,4 @@ if (module.parent) {
   process.exit(1)
 }
 
-require('./src')
+require('./src/keys')

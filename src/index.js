@@ -1,3 +1,5 @@
+// this is basically just node-tinywm, cleaned up
+
 const x11 = require('x11')
 const exec = require('child_process').execSync
 const EventEmitter = require('events').EventEmitter
