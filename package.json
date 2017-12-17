@@ -1,7 +1,7 @@
 {
   "name": "wmjs",
   "description": "X window manager for Node",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "author": {
     "name": "Zac Anger",
     "email": "zac@zacanger.com",
