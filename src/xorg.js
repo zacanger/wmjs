@@ -34,7 +34,8 @@ module.exports = function (cb) {
   }
 
   let w = Window.prototype
-  let methods = {
+
+  const methods = {
     MoveWindow: 'move',
     ResizeWindow: 'resize',
     MapWindow: 'map',
@@ -80,8 +81,10 @@ module.exports = function (cb) {
     self._children = []
     this.tree(function (err, tree) {
       let n = tree.children.length
-
-      if (n === 0) return n = 1, next() // eslint-disable-line
+      if (n === 0) {
+        n = 1
+        return next()
+      }
 
       tree.children.forEach(function (wid) {
         let w = createWindow(wid).load(function (err) {
@@ -92,7 +95,10 @@ module.exports = function (cb) {
       })
 
       function next (err) {
-        if (err) return n = -1, cb(err) // eslint-disable-line
+        if (err) {
+          n = -1
+          return cb(err)
+        }
         if (--n) return
         cb(null, self._children)
       }
@@ -156,6 +162,7 @@ module.exports = function (cb) {
     mouse.change(() => {
       console.log(mouse.toJSON())
     })
+
     setInterval(() => {
       X.QueryPointer(rid, (err, m) => {
         mouse.set(m.rootX, m.rootY)
@@ -176,9 +183,8 @@ module.exports = function (cb) {
 
       let wid = (ev.wid1 || ev.wid), win
 
-      if (wid) {
-        win = createWindow(wid)
-      }
+      if (wid) win = createWindow(wid)
+
       if (ev.name === 'KeyPress' || ev.name === 'KeyRelease') {
         const listener = kb[ev.buttons.toString(16) + '-' + ev.keycode.toString(16)]
         ev.down = ev.name === 'KeyPress'
@@ -186,19 +192,14 @@ module.exports = function (cb) {
         if (listener) listener(ev)
       }
 
-      if (ev.name === 'DestroyNotify') {
-        delete all[ev.wid1]
-      }
+      if (ev.name === 'DestroyNotify') delete all[ev.wid1]
 
       if (!root) throw new Error('no root')
 
-      if (ev.name === 'EnterWindow') {
-        ev.name = 'MouseOver'
-      }
+      if (ev.name === 'EnterWindow') ev.name = 'MouseOver'
 
-      if (win) {
-        win.emit(ev.name, ev)
-      }
+      if (win) win.emit(ev.name, ev)
+
       root.emit(ev.name, ev, win)
     })
   }).on('error', (err) => {
