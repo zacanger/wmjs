@@ -1,5 +1,7 @@
 Pretty much everything.
 
+also see (./config.md)
+
 * Automatically install xsession file, add to alternatives, and install icon
 * Make an icon
 * Resize windows with mouse
