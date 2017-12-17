@@ -21,3 +21,5 @@ also see (./config.md)
 * dmenu_run and x-terminal-emulator bound by default
 * emphasize that wmjs is Configuration over Convention(TM), because if you
   wanted the same window manager as everyone else you'd be using windows.
+
+SUPER is 65, space is 133, or maybe that's the other way around
