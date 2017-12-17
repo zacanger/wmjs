@@ -62,3 +62,6 @@ A `debugLog` (names are hard?) should be false by default in the config. When
 truthy, we should log stuff to a file. By default this could be something like
 `/tmp/wmjs-${DATE-TIMESTAMP}.log` (if `debugLog: 1`), but if debugLog is a
 string that seems to be a path, we should write there instead.
+
+Configs should be hot reloaded (shouldn't need to restart the WM to reload
+config).
