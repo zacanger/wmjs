@@ -15,9 +15,8 @@ X window manager for Node.
 
 ## Usage
 
-This doesn't really work yet. To check it out, clone this repo and do
-`./run.sh` (you'll need to have Xephyr installed). To stop that, `killall
-Xephyr`, I guess.
+This is pretty crappy, right now. To check it out, clone this repo and do
+`./run.sh` (you'll need to have Xephyr installed). To stop that, `./stop.sh`.
 
 To use with `startx`, put something like this in your `~/.xinitrc`:
 
@@ -45,12 +44,20 @@ DesktopNames=wmjs
 
 Where `/path/to/wmjs` is something like `/usr/local/bin/wmjs` (see `npm bin -g`).
 
+## Requirements
+
+To run in Xephyr, you need Xephyr.
+
+You'll also need `dmenu` and an `x-terminal-emulator`.
+
 ## Prior Art
 
-Right now, this is mostly a fork of
-[node-tinywm](https://github.com/Airblader/node-tinywm), which is an
-implementation of [tinywm](http://incise.org/tinywm.html) in JS. I'll probably
-have a long list here.
+This is heavily based on code from the following projects:
+
+* [tiles](https://github.com/dominictarr/tiles)
+* [node-tinywm](https://github.com/Airblader/node-tinywm), which is an
+  implementation of [tinywm](http://incise.org/tinywm.html)
+* example code from [x11](https://github.com/sidorares/node-x11)
 
 ## Recommended Applications
 

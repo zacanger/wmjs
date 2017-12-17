@@ -22,7 +22,7 @@ xorg((err, display) => {
       if (pressed.includes(SPACE)) {
         exec('dmenu_run')
       } else if (pressed.includes(RETURN)) {
-        exec('tt')
+        exec('x-terminal-emulator')
       }
     }
     pressed = []
