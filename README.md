@@ -19,6 +19,15 @@ This doesn't really work yet. To check it out, clone this repo and do
 `./run.sh` (you'll need to have Xephyr installed). To stop that, `killall
 Xephyr`, I guess.
 
+To use with `startx`, put something like this in your `~/.xinitrc`:
+
+```
+#!/bin/sh
+
+xrdb -merge ~/.Xresources
+exec wmjs # add this line
+```
+
 To make this available to your session manager, put something like this in
 `/usr/share/xsessions` (works on Debian, not tested on anything else):
 
