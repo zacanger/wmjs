@@ -5,16 +5,11 @@ const Rec2 = require('rec2')
 const Vec2 = require('vec2')
 const util = require('util')
 const EventEmitter = require('events').EventEmitter
+const each = require('zeelib/lib/each').default
 
 module.exports = function (cb) {
   let X
   let all = {}
-
-  function each (obj, iter) {
-    for (let k in obj) { // eslint-disable-line guard-for-in
-      iter(obj[k], k, obj)
-    }
-  }
 
   function createWindow (wid) {
     if (all[wid]) return all[wid]
