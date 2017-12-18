@@ -6,6 +6,7 @@ const Vec2 = require('vec2')
 const util = require('util')
 const EventEmitter = require('events').EventEmitter
 const each = require('zeelib/lib/each').default
+const dir = require('zeelib/lib/dir').default
 
 let dragStart = null
 
@@ -207,7 +208,7 @@ module.exports = function (cb) {
         winY = dragStart.winY + ev.rooty - dragStart.rooty
         X.MoveWindow(fid, winX, winY)
       } else if (ev.type === 12) {
-        console.dir(ev, { colors: true })
+        dir(ev)
         // X.Render.Composite(3, bggrad, 0, framepic, 0, 0, 0, 0, 0, 0, width, height)
       }
 
