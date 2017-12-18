@@ -17,3 +17,4 @@ Also see [config notes](./config.md).
   * Could be based on keybinds, not true tiling, just snapping
   * If true tiling, resize with keybinds, swapping panes
   * Saved layouts? (Probably not)
+* Configurable background window transparency?
