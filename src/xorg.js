@@ -163,7 +163,7 @@ module.exports = function (cb) {
 
     const mouse = new Vec2(0, 0)
     mouse.change(() => {
-      console.log(mouse.toJSON())
+      // console.log(mouse.toJSON())
     })
 
     setInterval(() => {
@@ -190,6 +190,7 @@ module.exports = function (cb) {
       if (wid) win = createWindow(wid)
 
       // drag
+      /*
       const fid = X.AllocID()
       let winX = 50
       let winY = 50
@@ -211,6 +212,7 @@ module.exports = function (cb) {
         dir(ev)
         // X.Render.Composite(3, bggrad, 0, framepic, 0, 0, 0, 0, 0, 0, width, height)
       }
+      */
 
       if (ev.name === 'KeyPress' || ev.name === 'KeyRelease') {
         const listener = kb[ev.buttons.toString(16) + '-' + ev.keycode.toString(16)]
