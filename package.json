@@ -33,10 +33,10 @@
     "vec2": "1.6.0",
     "x11": "2.3.0",
     "x11-keyboard": "0.1.0",
-    "zeelib": "4.0.7"
+    "zeelib": "5.0.0"
   },
   "devDependencies": {
-    "babel-eslint": "8.1.0",
+    "babel-eslint": "8.1.2",
     "eslint": "4.14.0",
     "eslint-config-jane": "0.7.2",
     "eslint-plugin-babel": "4.1.2",
