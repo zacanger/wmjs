@@ -1,6 +1,9 @@
 const xorg = require('./xorg')
 const x11 = require('x11')
-const { exec } = require('./util')
+const { exec, getDefaultTerminal } = require('./util')
+
+const dmenu = 'dmenu_run'
+const term = getDefaultTerminal()
 
 const events = x11.eventMask.Button1Motion |
   x11.eventMask.ButtonPress |
@@ -12,6 +15,7 @@ const events = x11.eventMask.Button1Motion |
   x11.eventMask.KeyRelease
 
 xorg((err, display) => {
+  // if (err) throw err
   display.root.set({
     eventMask: events
   })
@@ -29,9 +33,9 @@ xorg((err, display) => {
   display.root.on('KeyRelease', () => {
     if (pressed.includes(SUPER)) {
       if (pressed.includes(SPACE)) {
-        exec('dmenu_run')
+        exec(dmenu)
       } else if (pressed.includes(RETURN)) {
-        exec('x-terminal-emulator')
+        exec(term)
       }
     }
     pressed = []
