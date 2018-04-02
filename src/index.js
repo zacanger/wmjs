@@ -1,6 +1,6 @@
 const xorg = require('./xorg')
 const x11 = require('x11')
-const { exec, getDefaultTerminal } = require('./util')
+const { exec, getDefaultTerminal, blowUp } = require('./util')
 
 const dmenu = 'dmenu_run'
 const term = getDefaultTerminal()
@@ -14,27 +14,29 @@ const events = x11.eventMask.Button1Motion |
   x11.eventMask.KeyPress |
   x11.eventMask.KeyRelease
 
+const KEYS = {
+  SUPER: 133,
+  SPACE: 65,
+  RETURN: 36
+}
+
 xorg((err, display) => {
-  // if (err) throw err
+  // blowUp(err)
   display.root.set({
     eventMask: events
   })
 
   let pressed = []
 
-  const SUPER = 133
-  const SPACE = 65
-  const RETURN = 36
-
   display.root.on('KeyPress', (ev) => {
     pressed.push(ev.keycode)
   })
 
   display.root.on('KeyRelease', () => {
-    if (pressed.includes(SUPER)) {
-      if (pressed.includes(SPACE)) {
+    if (pressed.includes(KEYS.SUPER)) {
+      if (pressed.includes(KEYS.SPACE)) {
         exec(dmenu)
-      } else if (pressed.includes(RETURN)) {
+      } else if (pressed.includes(KEYS.RETURN)) {
         exec(term)
       }
     }
