@@ -11,7 +11,7 @@ const getHome = require('zeelib/lib/get-user-home').default
 // then fancy terms people might like, then the standard programs.
 const terms = [
   // env vars
-  env.TERM,
+  // env.TERM,
   env.TERMINAL,
   // programs that run whatever you've set
   'x-terminal-emulator',
