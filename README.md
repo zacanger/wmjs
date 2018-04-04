@@ -1,5 +1,7 @@
 # wmjs
 
+[WIP]
+
 X window manager for Node, emphasizing Configuration Over Convention, because if
 you wanted the same experience as everyone else you'd be using a Mac.
 
@@ -9,6 +11,10 @@ you wanted the same experience as everyone else you'd be using a Mac.
 * [Roadmap](./TODO.md)
 
 --------
+
+## Known Issues
+
+Pretty much nothing actually works.
 
 ## Installation
 
