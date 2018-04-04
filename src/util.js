@@ -1,6 +1,6 @@
 const id = require('zeelib/lib/id').default
-const exit = require('zeelib/lib/exit').default
-const execa = require('execa')
+// const exit = require('zeelib/lib/exit').default
+// const execa = require('execa')
 const { env } = process
 const getHome = require('zeelib/lib/get-user-home').default
 
@@ -48,7 +48,8 @@ const terms = [
 ].filter(id)
 
 const exec = (command, opts) =>
-  execa.shellSync(`$SHELL -i -c ${command}`, opts)
+  require('child_process').execSync(command, opts).toString('utf8').trim()
+  // execa.shellSync(`$SHELL -i -c ${command}`, opts)
 
 const blowUp = (err) => {
   if (!err) return
