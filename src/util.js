@@ -84,7 +84,7 @@ const getConfig = () => {
   try {
     return require(path)(defaultConfig)
   } catch (_) {
-    return () => defaultConfig
+    return defaultConfig
   }
 }
 
