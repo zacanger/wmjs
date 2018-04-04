@@ -1,9 +1,12 @@
 const xorg = require('./xorg')
 const x11 = require('x11')
-const { exec, getDefaultTerminal, blowUp } = require('./util')
+const { getConfig, exec, getDefaultTerminal, blowUp } = require('./util')
 
 const dmenu = 'dmenu_run'
 const term = getDefaultTerminal()
+
+const config = getConfig()
+const KEYS = config.keys
 
 const events = x11.eventMask.Button1Motion |
   x11.eventMask.ButtonPress |
@@ -13,12 +16,6 @@ const events = x11.eventMask.Button1Motion |
   // x11.eventMask.Exposure |
   x11.eventMask.KeyPress |
   x11.eventMask.KeyRelease
-
-const KEYS = {
-  SUPER: 133,
-  SPACE: 65,
-  RETURN: 36
-}
 
 xorg((err, display) => {
   // blowUp(err)

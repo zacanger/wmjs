@@ -1,7 +1,8 @@
 const id = require('zeelib/lib/id').default
 const exit = require('zeelib/lib/exit').default
-const { execSync } = require('child_process')
+const { spawn } = require('child_process')
 const { env } = process
+const getHome = require('zeelib/lib/get-user-home').default
 
 // this is sorted in what i think is a good order by preference.
 // everyone probably has xterm and maybe rxvt, but may have
@@ -46,8 +47,8 @@ const terms = [
   'xterm'
 ].filter(id)
 
-const exec = (command, opts) =>
-  execSync(command, opts).toString('utf8').trim()
+const exec = (command, args, opts) =>
+  spawn(command, args, opts).unref()
 
 const blowUp = (err) => {
   if (!err) return
@@ -67,9 +68,30 @@ const isInstalled = (program) => {
 const getDefaultTerminal = () =>
   terms[terms.map(isInstalled).findIndex(id)]
 
-module.exports = {
+const keys = {
+  SUPER: 133,
+  SPACE: 65,
+  RETURN: 36
+}
+
+const defaultConfig = {
   exec,
+  keys
+}
+
+const getConfig = () => {
+  const path = getHome() + '/config/wmjs'
+  try {
+    return require(path)(defaultConfig)
+  } catch (_) {
+    return () => defaultConfig
+  }
+}
+
+module.exports = {
   blowUp,
-  isInstalled,
-  getDefaultTerminal
+  exec,
+  getConfig,
+  getDefaultTerminal,
+  isInstalled
 }
