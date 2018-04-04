@@ -18,7 +18,7 @@ const events = x11.eventMask.Button1Motion |
   x11.eventMask.KeyRelease
 
 xorg((err, display) => {
-  // blowUp(err)
+  blowUp(err)
   display.root.set({
     eventMask: events
   })

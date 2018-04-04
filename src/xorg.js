@@ -6,9 +6,7 @@ const Vec2 = require('vec2')
 const util = require('util')
 const EventEmitter = require('events').EventEmitter
 const each = require('zeelib/lib/each').default
-const dir = require('zeelib/lib/dir').default
-
-let dragStart = null
+// const dir = require('zeelib/lib/dir').default
 
 module.exports = function (cb) {
   let X
@@ -188,31 +186,6 @@ module.exports = function (cb) {
       let win
 
       if (wid) win = createWindow(wid)
-
-      // drag
-      /*
-      const fid = X.AllocID()
-      let winX = 50
-      let winY = 50
-      let pressingAlt = false
-      if (ev.type === 1) {
-        pressingAlt = true
-      }
-      if (ev.type === 17) {
-        X.DestroyWindow(fid)
-      } else if (ev.type === 4) {
-        dragStart = { rootx: ev.rootx, rooty: ev.rooty, x: ev.x, y: ev.y, winX: winX, winY: winY }
-      } else if (ev.type === 5) {
-        dragStart = null
-      } else if (ev.type === 6) {
-        winX = dragStart.winX + ev.rootx - dragStart.rootx
-        winY = dragStart.winY + ev.rooty - dragStart.rooty
-        X.MoveWindow(fid, winX, winY)
-      } else if (ev.type === 12) {
-        dir(ev)
-        // X.Render.Composite(3, bggrad, 0, framepic, 0, 0, 0, 0, 0, 0, width, height)
-      }
-      */
 
       if (ev.name === 'KeyPress' || ev.name === 'KeyRelease') {
         const listener = kb[ev.buttons.toString(16) + '-' + ev.keycode.toString(16)]

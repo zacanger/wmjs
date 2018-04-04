@@ -2,8 +2,7 @@
 
 [WIP]
 
-X window manager for Node, emphasizing Configuration Over Convention, because if
-you wanted the same experience as everyone else you'd be using a Mac.
+Tiling X window manager in Node, emphasizing Configuration Over Convention.
 
 ![screenshot](http://zacanger.com/assets/wmjs.png)
 
@@ -55,7 +54,7 @@ Where `/path/to/wmjs` is something like `/usr/local/bin/wmjs` (see `npm bin -g`)
 
 To run in Xephyr, you need Xephyr.
 
-You'll also need `dmenu` and an `x-terminal-emulator`.
+You'll also need a terminal, and I recommend having `dmenu`.
 
 ## Configuration
 
@@ -74,6 +73,10 @@ a single object as an argument, with these properties:
 * `keys`: a map of keys in the format `keys.SUPER: keycode, keys.SPACE: keycode`, etc.
 * `exec`: a wrapper for `child_process.spawn`
 * `defaults`: all defaults
+
+### **NOTE**
+
+The config doesn't actually do anything yet.
 
 Example:
 

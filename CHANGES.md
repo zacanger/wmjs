@@ -1,3 +1,5 @@
+* 0.1.3 - 2018-04-04
+  * Add basic config-handling code (doesn't matter yet)
 * 0.0.9 - 2017-12-17
   * Fixed what's spawned on basic keys and added note about requirements
 * 0.0.8 - 2017-12-17
