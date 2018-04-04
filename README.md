@@ -51,6 +51,48 @@ To run in Xephyr, you need Xephyr.
 
 You'll also need `dmenu` and an `x-terminal-emulator`.
 
+## Configuration
+
+`wmjs` can use an optional config file. This should be resolvable under
+`~/.config/wmjs`. Since it should be a module, that means you could have any of
+the following:
+
+* `~/.config/wmjs.js`
+* `~/.config/wmjs/index.js`
+* Any file under `~/.config/wmjs/*.js` if you have a `package.json` in that
+  directory with a `main` field.
+
+Your config file should be a function that returns an object. It will be passed
+a single object as an argument, with these properties:
+
+* `keys`: a map of keys in the format `keys.SUPER: keycode, keys.SPACE: keycode`, etc.
+* `exec`: a wrapper for `child_process.spawn`
+* `defaults`: all defaults
+
+Example:
+
+```javascript
+const alert = require('alert-node')
+
+module.exports = ({ keys, exec, defaults }) => ({
+  ...defaults,
+  modKey: keys.ALT, // main mod key; see below
+  startupPrograms: [ // this name sucks; an array of things to exec on start
+    'xflux -z 84047',
+    'dmenu_run',
+    'stterm',
+    'dropbox start'
+  ]
+  keybinds: {
+    [`${keys.SUPER}+${keys.SPACE}`]: exec('dmenu_run'),
+    [`${keys.SUPER}+${keys.SHIFT}+${keys.RETURN}`]: alert(process.env) // whatever
+  }
+})
+```
+
+If no config file is provided, we just use the defaults. The config file should
+use CommonJS modules, at least until Node natively supports ESM.
+
 ## Prior Art
 
 This is heavily based on code from the following projects:
