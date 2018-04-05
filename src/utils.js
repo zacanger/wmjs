@@ -89,10 +89,59 @@ const getConfig = () => {
   }
 }
 
+function each (obj, iter) {
+  for (let k in obj) iter(obj[k], k, obj)
+}
+
+function remove (array, item) {
+  let i = array.indexOf(item)
+  if (~i) array.splice(i, 1)
+}
+
+function find (ary, test) {
+  for (let i in ary) {
+    if (test(ary[i], i, ary)) return ary[i]
+  }
+}
+
+function swap (ary, a, b) {
+  let i = ary.indexOf(a)
+  let j = ary.indexOf(b)
+  // if the window is the first or last, do not swap,
+  // instead shift/pop so that overall order is preserved.
+
+  if (i === 0 && j === ary.length - 1) {
+    ary.push(ary.shift())
+  } else if (j === 0 && i === ary.length - 1) {
+    ary.unshift(ary.pop())
+  } else {
+    ary[i] = b
+    ary[j] = a
+  }
+  return ary
+}
+
+
+function relative (ary, item, dir) {
+  let i = ary.indexOf(item)
+  if (~i) {
+    i = i + dir
+    if (i < 0) i = ary.length + i
+    if (i >= ary.length) i = i - ary.length
+    const w = ary[i]
+    return w
+  }
+}
+
 module.exports = {
   blowUp,
+  each,
   exec,
+  find,
   getConfig,
   getDefaultTerminal,
-  isInstalled
+  isInstalled,
+  relative,
+  remove,
+  swap
 }
