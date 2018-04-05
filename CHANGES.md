@@ -1,3 +1,5 @@
+* 0.2.2 - 2018-04-04
+  * Change `exec` name in config to `run` for clarity
 * 0.2.0 - 2018-04-04
   * Get tiling working, thanks to code from [tiles](https://github.com/dominictarr/tiles)
 * 0.1.3 - 2018-04-04
