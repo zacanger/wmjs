@@ -71,7 +71,7 @@ Your config file should be a function that returns an object. It will be passed
 a single object as an argument, with these properties:
 
 * `keys`: a map of keys in the format `keys.SUPER: keycode, keys.SPACE: keycode`, etc.
-* `exec`: a wrapper for `child_process.spawn`
+* `run`: a wrapper for `child_process.spawn`
 * `defaults`: all defaults
 
 #### **NOTE**
@@ -83,7 +83,7 @@ Example:
 ```javascript
 const alert = require('alert-node')
 
-module.exports = ({ keys, exec, defaults }) => ({
+module.exports = ({ keys, run, defaults }) => ({
   ...defaults,
   modKey: keys.ALT, // main mod key; see below
   startupPrograms: [ // this name sucks; an array of things to exec on start
@@ -91,7 +91,7 @@ module.exports = ({ keys, exec, defaults }) => ({
     'dropbox-cli start'
   ]
   keybinds: {
-    [`${keys.SUPER}+${keys.SPACE}`]: exec('dmenu_run'),
+    [`${keys.SUPER}+${keys.SPACE}`]: run('dmenu_run'),
     [`${keys.SUPER}+${keys.SHIFT}+${keys.RETURN}`]: alert(process.env) // whatever
   }
 })

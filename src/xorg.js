@@ -36,7 +36,6 @@ module.exports = function (cb) {
       this.id = X.AllocID()
       X.CreateWindow(this.id, opts)
     }
-    this.event
     this.id = wid
     X.event_consumers[wid] = X
   }
@@ -95,8 +94,8 @@ module.exports = function (cb) {
         return next()
       }
 
-      tree.children.forEach(function (wid) {
-        let w = createWindow(wid).load(function (err) {
+      tree.children.forEach((wid) => {
+        let w = createWindow(wid).load((err) => {
           if (err) next(err)
           self._children.push(w)
           next()
@@ -151,7 +150,7 @@ module.exports = function (cb) {
   }
 
   let _ev
-  X = x11.createClient(function (err, display) {
+  X = x11.createClient((err, display) => {
     if (err) return cb(err)
     const rid = display.screen[0].root
 
@@ -160,13 +159,13 @@ module.exports = function (cb) {
       // console.log(mouse.toJSON())
     })
 
-    setInterval(function () {
-      X.QueryPointer(rid, function (err, m) {
+    setInterval(() => {
+      X.QueryPointer(rid, (err, m) => {
         mouse.set(m.rootX, m.rootY)
       })
     }, 200)
 
-    const root = createWindow(+rid).load(function (_err) {
+    const root = createWindow(+rid).load((_err) => {
       display.root = root
       display.mouse = mouse
       cb(err, display, display)
@@ -174,8 +173,8 @@ module.exports = function (cb) {
 
     display.createWindow = createWindow
 
-    X.on('event', function (ev) {
-      // BUG IN x11? events are triggered twice!
+    X.on('event', (ev) => {
+      // bug in x11? events are triggered twice!
       if (_ev === ev) return
       _ev = ev
 

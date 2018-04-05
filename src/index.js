@@ -1,15 +1,10 @@
 #!/usr/bin/env node
 
-const _spawn = require('child_process').spawn
 const Layout = require('./layout')
 const u = require('./utils')
 const ease = require('vec2-easing')
 
-function spawn (cmd) {
-  let args = cmd.split(/\s+/)
-  cmd = args.shift()
-  _spawn(cmd, args)
-}
+const spawn = u.spawn
 
 const dmenu = 'dmenu_run'
 const term = u.getDefaultTerminal()
@@ -167,7 +162,7 @@ require('./xorg')(function (err, client, display) {
 
   // super-Space
   rw.onKey(0x40, 65, (ev) => {
-    if (ev.down) spawn('dmenu_run')
+    if (ev.down) spawn(dmenu)
   })
 
   // super-Left

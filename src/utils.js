@@ -1,8 +1,20 @@
-const id = require('zeelib/lib/id').default
-// const exit = require('zeelib/lib/exit').default
-// const execa = require('execa')
+const cp = require('child_process')
 const { env } = process
+// const exit = require('zeelib/lib/exit').default
+const id = require('zeelib/lib/id').default
 const getHome = require('zeelib/lib/get-user-home').default
+
+const spawn = (cmd) => {
+  let args = cmd.split(/\s+/)
+  cmd = args.shift()
+  cp.spawn(cmd, args)
+}
+
+// const execa = require('execa')
+// execa.shellSync(`$SHELL -i -c ${command}`, opts)
+
+const exec = (cmd, opts) =>
+  cp.execSync(cmd, opts).toString('utf8').trim()
 
 // this is sorted in what i think is a good order by preference.
 // everyone probably has xterm and maybe rxvt, but may have
@@ -47,10 +59,6 @@ const terms = [
   'xterm'
 ].filter(id)
 
-const exec = (command, opts) =>
-  require('child_process').execSync(command, opts).toString('utf8').trim()
-  // execa.shellSync(`$SHELL -i -c ${command}`, opts)
-
 const blowUp = (err) => {
   if (!err) return
   console.trace(err)
@@ -76,7 +84,7 @@ const keys = {
 }
 
 const defaultConfig = {
-  exec,
+  run: spawn,
   keys
 }
 
@@ -143,5 +151,6 @@ module.exports = {
   isInstalled,
   relative,
   remove,
+  spawn,
   swap
 }
