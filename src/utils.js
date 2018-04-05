@@ -30,22 +30,29 @@ const terms = [
   'terminal',
 
   // fancy terminals
+  'Eterm',
   'alacritty',
+  'aterm',
   'eterm',
   'gnome-terminal',
+  'guake',
   'hyper',
   'kitty',
   'konsole',
   'lilyterm',
   'lxterminal',
+  'mate-terminal',
   'mrxvt',
-  'quake',
+  'qterminal',
   'roxterm',
   'sakura',
   'terminator',
+  'terminix',
   'terminology',
+  'termit',
   'termite',
   'tilda',
+  'tilix',
   'xfce4-terminal',
   'yakuake',
 
@@ -55,6 +62,7 @@ const terms = [
 
   // defaults
   'urxvt',
+  'uxterm',
   'rxvt',
   'xterm'
 ].filter(id)
