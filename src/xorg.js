@@ -2,31 +2,33 @@
 // my aim to be to make it browserify where possible,
 // so that your expectations from web development apply.
 
-var x11 = require('x11')
-var Rec2 = require('rec2')
-var Vec2 = require('vec2')
+const util = require('util')
+const EventEmitter = require('events').EventEmitter
+const x11 = require('x11')
+const Rec2 = require('rec2')
+const Vec2 = require('vec2')
+const utils = require('./utils')
 
+const each = utils.each
 module.exports = function (cb) {
-  var X
-  var all = {}
-
-  function each (obj, iter) {
-    for (var k in obj)
-      iter(obj[k], k, obj)
-  }
+  let X
+  let all = {}
 
   function createWindow (wid) {
+    if (wid != null && typeof wid !== 'number') {
+      throw new Error('must be number, was:' + wid)
+    }
+
     if (all[wid]) return all[wid]
-    if (null == wid) {
-      throw new Error('create window!')
-      wid = X.AllocID()
-      X.createWindow(wid)
+    if (wid == null) {
+      // FIX THIS
+      throw new Error('unknown window ' + wid)
+      // wid = X.AllocID()
+      // X.CreateWindow(wid)
     }
     return all[wid] = new Window(wid)
   }
 
-  var util = require('util')
-  var EventEmitter = require('events').EventEmitter
   util.inherits(Window, EventEmitter)
 
   function Window (wid, opts) {
@@ -39,8 +41,8 @@ module.exports = function (cb) {
     X.event_consumers[wid] = X
   }
 
-  var w = Window.prototype
-  var methods = {
+  const w = Window.prototype
+  const methods = {
     MoveWindow: 'move',
     ResizeWindow: 'resize',
     MapWindow: 'map',
@@ -54,14 +56,14 @@ module.exports = function (cb) {
 
   each(methods, function (_name, name) {
     w[_name] = function () {
-      var args = [].slice.call(arguments)
+      let args = [].slice.call(arguments)
       args.unshift(this.id)
       return X[name].apply(X, args)
     }
   })
 
   w.load = function (cb) {
-    var self = this
+    let self = this
 
     this.get(function (err, attrs) {
       self.attrs = attrs
@@ -70,8 +72,7 @@ module.exports = function (cb) {
 
     this.getBounds(function (err, bounds) {
       // self.bounds = bounds
-      var b = self.bounds =
-        new Rec2(bounds.posX, bounds.posY, bounds.width, bounds.height)
+      let b = self.bounds = new Rec2(bounds.posX, bounds.posY, bounds.width, bounds.height)
       b.change(function () {
         self.move(b.x, b.y)
       })
@@ -84,16 +85,18 @@ module.exports = function (cb) {
   }
 
   w.children = function (cb) {
-    var self = this
+    let self = this
     self._children = []
     this.tree(function (err, tree) {
-      var n = tree.children.length
+      let n = tree.children.length
 
-      if (n === 0)
-        return n = 1, next()
+      if (n === 0) {
+        n = 1
+        return next()
+      }
 
       tree.children.forEach(function (wid) {
-        var w = createWindow(wid).load(function (err) {
+        let w = createWindow(wid).load(function (err) {
           if (err) next(err)
           self._children.push(w)
           next()
@@ -101,7 +104,10 @@ module.exports = function (cb) {
       })
 
       function next (err) {
-        if (err) return n = -1, cb(err)
+        if (err) {
+          n = -1
+          return cb(err)
+        }
         if (--n) return
         cb(null, self._children)
       }
@@ -109,7 +115,7 @@ module.exports = function (cb) {
     return this
   }
 
-  var kb = {}
+  let kb = {}
 
   w.onKey = function (mod, key, listener) {
     kb[mod.toString('16') + '-' + key.toString(16)] = listener
@@ -144,52 +150,41 @@ module.exports = function (cb) {
     return this
   }
 
-  function createWindow (wid) {
-    if (wid != null && 'number' != typeof wid)
-      throw new Error('must be number, was:' + wid)
-    if (all[wid]) return all[wid]
-    if (null == wid) {
-      // FIX THIS
-      throw new Error('unknown window ' + wid)
-    // wid = X.AllocID()
-    // X.CreateWindow(wid)
-    }
-    return all[wid] = new Window(wid)
-  }
-  var _ev
+  let _ev
   X = x11.createClient(function (err, display) {
     if (err) return cb(err)
-    var rid = display.screen[0].root
+    const rid = display.screen[0].root
 
-    var mouse = new Vec2(0, 0)
+    const mouse = new Vec2(0, 0)
     mouse.change(function () {
       // console.log(mouse.toJSON())
     })
+
     setInterval(function () {
       X.QueryPointer(rid, function (err, m) {
         mouse.set(m.rootX, m.rootY)
       })
     }, 200)
 
-    var root = createWindow(+rid).load(function (_err) {
+    const root = createWindow(+rid).load(function (_err) {
       display.root = root
       display.mouse = mouse
       cb(err, display, display)
     })
+
     display.createWindow = createWindow
 
     X.on('event', function (ev) {
-
       // BUG IN x11? events are triggered twice!
       if (_ev === ev) return
       _ev = ev
 
-      var wid = (ev.wid1 || ev.wid), win
+      let wid = (ev.wid1 || ev.wid)
+      let win
 
-      if (wid)
-        win = createWindow(wid)
+      if (wid) win = createWindow(wid)
       if (ev.name === 'KeyPress' || ev.name === 'KeyRelease') {
-        var listener = kb[ev.buttons.toString(16) + '-' + ev.keycode.toString(16)]
+        let listener = kb[ev.buttons.toString(16) + '-' + ev.keycode.toString(16)]
         ev.down = ev.name === 'KeyPress'
         ev.up = !ev.down
         if (listener) listener(ev)
@@ -205,7 +200,7 @@ module.exports = function (cb) {
 
       root.emit(ev.name, ev, win)
     })
-  }).on('error', function (err) {
+  }).on('error', (err) => {
     console.error(err.stack)
   })
 }
