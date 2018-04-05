@@ -33,14 +33,14 @@ xrdb -merge ~/.Xresources
 exec wmjs # add this line
 ```
 
-To make this available to your session manager, put something like this in
-`/usr/share/xsessions` (works on Debian, not tested on anything else):
+If you use a graphical session manager, you'll need a file under
+`/usr/share/xsessions`:
 
 ```
 [Desktop Entry]
 Encoding=UTF-8
 Name=wmjs
-Comment=Window manger in node
+Comment=Tiling X window manager in Node
 Exec=/path/to/wmjs
 Icon=wmjs
 Type=XSession
@@ -74,7 +74,7 @@ a single object as an argument, with these properties:
 * `exec`: a wrapper for `child_process.spawn`
 * `defaults`: all defaults
 
-### **NOTE**
+#### **NOTE**
 
 The config doesn't actually do anything yet.
 
@@ -88,9 +88,7 @@ module.exports = ({ keys, exec, defaults }) => ({
   modKey: keys.ALT, // main mod key; see below
   startupPrograms: [ // this name sucks; an array of things to exec on start
     'xflux -z 84047',
-    'dmenu_run',
-    'stterm',
-    'dropbox start'
+    'dropbox-cli start'
   ]
   keybinds: {
     [`${keys.SUPER}+${keys.SPACE}`]: exec('dmenu_run'),
