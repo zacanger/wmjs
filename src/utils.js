@@ -1,5 +1,4 @@
 const cp = require('child_process')
-const { env } = process
 // const exit = require('zeelib/lib/exit').default
 const id = require('zeelib/lib/id').default
 const getHome = require('zeelib/lib/get-user-home').default
@@ -16,18 +15,10 @@ const spawn = (cmd) => {
 const exec = (cmd, opts) =>
   cp.execSync(cmd, opts).toString('utf8').trim()
 
-// this is sorted in what i think is a good order by preference.
-// everyone probably has xterm and maybe rxvt, but may have
-// something else they prefer.
-// so first we check env vars, then scripts/programs that run defaults,
-// then fancy terms people might like, then the standard programs.
 const terms = [
-  // env vars
-  // env.TERM,
-  env.TERMINAL,
-  // programs that run whatever you've set
-  'x-terminal-emulator',
-  'terminal',
+  process.env.TERMINAL,
+  'x-terminal-emulator', // debian
+  'terminal', // arch, i think?
 
   // fancy terminals
   'Eterm',
@@ -56,7 +47,7 @@ const terms = [
   'xfce4-terminal',
   'yakuake',
 
-  // not exactly fancy...
+  // less fancy terminals
   'stterm', // debian
   'st', // not-debian -- might conflict with the st server package...
 
