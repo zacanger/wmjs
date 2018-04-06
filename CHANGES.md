@@ -1,4 +1,4 @@
-* 0.3.5 - 2018-04-06
+* 0.3.6 - 2018-04-06
   * Config: take a `terminal`
 * 0.3.5 - 2018-04-06
   * Don't automatically spawn a new terminal when all windows are closed
