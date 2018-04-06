@@ -148,7 +148,7 @@ require('./xorg')((err, client) => {
   })
 
   // open terminal
-  // super-T/K
+  // super-return
   // rw.onKey(0x40, 45, function (ev) {
   rw.onKey(0x40, 36, (ev) => {
     if (ev.down) spawn(term)
@@ -236,5 +236,5 @@ require('./xorg')((err, client) => {
 
   rw.onKey(0x40, 53, close) // super-Q
   rw.onKey(0x40, 59, close) // super-W
-  rw.onKey(0x41, 59, closeLayout) // super-W
+  rw.onKey(0x40, 59, closeLayout) // super-W
 })
