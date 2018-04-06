@@ -133,8 +133,9 @@ managers.
 
 Pretty much everything.
 
-* Automatically install xsession file, add to alternatives, and install icon
+* Automatically install xsession file, add to alternatives (Debian), and install icon
 * Make an icon
+* Properly set wmname (NETWM, see EWMH/wm-spec)
 * Tiling:
   * Automatic works, but it's bad
   * Make manual work also
