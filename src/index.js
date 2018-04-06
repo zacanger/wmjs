@@ -139,9 +139,6 @@ require('./xorg')((err, client) => {
 
   rw.on('DestroyNotify', (ev, win) => {
     l.remove(win)
-    // UGLY HACK AROUND STRANGE ERROR WHERE
-    // KB SHORTCUTS STOP WORKING WHEN YOU CLOSE ALL THE WINDOWS
-    if (!l.tiles.length) spawn(term)
   })
 
   rw.on('ConfigureRequest', (ev, win) => {
@@ -241,4 +238,3 @@ require('./xorg')((err, client) => {
   rw.onKey(0x40, 59, close) // super-W
   rw.onKey(0x41, 59, closeLayout) // super-W
 })
-
