@@ -3,6 +3,7 @@
 const Layout = require('./layout')
 const u = require('./utils')
 const ease = require('vec2-easing')
+const isEmpty = require('zeelib/lib/is-empty').default
 
 const spawn = u.spawn
 
@@ -100,6 +101,13 @@ require('./xorg')(function (err, client, display) {
     })
     l.layout()
   })
+
+  if (!isEmpty(config.startupPrograms)) {
+    config.startupPrograms.forEach((program) => {
+      console.log(program)
+      spawn(program)
+    })
+  }
 
   rw.on('MapRequest', (ev, win) => {
     // load the window's properties, and then lay it out.

@@ -74,10 +74,6 @@ a single object as an argument, with these properties:
 * `run`: a wrapper for `child_process.spawn`
 * `defaults`: all defaults
 
-#### **NOTE**
-
-The config doesn't actually do anything yet.
-
 Example:
 
 ```javascript
@@ -85,8 +81,8 @@ const alert = require('alert-node')
 
 module.exports = ({ keys, run, defaults }) => ({
   ...defaults,
-  modKey: keys.ALT, // main mod key; see below
-  startupPrograms: [ // this name sucks; an array of things to exec on start
+  modKey: keys.ALT, // main mod key
+  startupPrograms: [ // an array of things to spawn on start
     'xflux -z 84047',
     'dropbox-cli start'
   ]

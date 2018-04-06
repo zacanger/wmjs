@@ -88,9 +88,10 @@ const defaultConfig = {
 }
 
 const getConfig = () => {
-  const path = getHome() + '/config/wmjs'
+  const path = getHome() + '/.config/wmjs'
   try {
-    return require(path)(defaultConfig)
+    const userConfig = require(path)(defaultConfig)
+    return Object.assign({}, defaultConfig, userConfig)
   } catch (_) {
     return defaultConfig
   }
@@ -127,7 +128,6 @@ function swap (ary, a, b) {
   }
   return ary
 }
-
 
 function relative (ary, item, dir) {
   let i = ary.indexOf(item)

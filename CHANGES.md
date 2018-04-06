@@ -1,3 +1,6 @@
+* 0.3.0 - 2018-04-05
+  * Taking a config file now works
+  * `startupPrograms` in the config file now works
 * 0.2.2 - 2018-04-04
   * Change `exec` name in config to `run` for clarity
 * 0.2.0 - 2018-04-04
