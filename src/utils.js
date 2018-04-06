@@ -88,10 +88,14 @@ const defaultConfig = {
   borderWidth: 1
 }
 
+const stringToHex = (s = 'FFFFFF') =>
+  Number('0x' + s.replace('#', ''))
+
 const getConfig = () => {
   const path = getHome() + '/.config/wmjs'
   try {
     const userConfig = require(path)(defaultConfig)
+    userConfig.borderColor = stringToHex(userConfig.borderColor)
     return Object.assign({}, defaultConfig, userConfig)
   } catch (_) {
     return defaultConfig

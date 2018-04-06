@@ -87,6 +87,7 @@ module.exports = ({ keys, run, defaults }) => ({
     'dropbox-cli start'
   ],
   borderWidth: 1, // width of window borders
+  borderColor: 'FFFFFF', // color for borders (hex)
   keybinds: {
     [`${keys.SUPER}+${keys.SPACE}`]: run('dmenu_run'),
     [`${keys.SUPER}+${keys.SHIFT}+${keys.RETURN}`]: alert(process.env) // whatever

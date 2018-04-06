@@ -121,7 +121,7 @@ require('./xorg')(function (err, client, display) {
       win.configure({ borderWidth: config.borderWidth })
       win.on('focus', () => {
         if (_prevFocus) _prevFocus.set({ borderPixel: 0x0 })
-        win.set({ borderPixel: 0xffff00 })
+        win.set({ borderPixel: config.borderColor })
         _prevFocus = win
         l.focused = win
       })
