@@ -104,7 +104,6 @@ require('./xorg')(function (err, client, display) {
 
   if (!isEmpty(config.startupPrograms)) {
     config.startupPrograms.forEach((program) => {
-      console.log(program)
       spawn(program)
     })
   }
