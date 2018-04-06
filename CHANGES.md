@@ -1,3 +1,5 @@
+* 0.3.5 - 2018-04-06
+  * Don't automatically spawn a new terminal when all windows are closed
 * 0.3.4 - 2018-04-06
   * Config: take a `launcher`
 * 0.3.3 - 2018-04-06
