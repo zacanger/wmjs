@@ -1,3 +1,7 @@
+* 0.3.3 - 2018-04-06
+  * Take a `borderColor` in config
+* 0.3.2 - 2018-04-06
+  * Take a `borderWidth` in config
 * 0.3.0 - 2018-04-05
   * Taking a config file now works
   * `startupPrograms` in the config file now works
