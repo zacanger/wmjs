@@ -84,7 +84,8 @@ const keys = {
 
 const defaultConfig = {
   run: spawn,
-  keys
+  keys,
+  borderWidth: 1
 }
 
 const getConfig = () => {

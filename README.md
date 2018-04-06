@@ -85,7 +85,8 @@ module.exports = ({ keys, run, defaults }) => ({
   startupPrograms: [ // an array of things to spawn on start
     'xflux -z 84047',
     'dropbox-cli start'
-  ]
+  ],
+  borderWidth: 1, // width of window borders
   keybinds: {
     [`${keys.SUPER}+${keys.SPACE}`]: run('dmenu_run'),
     [`${keys.SUPER}+${keys.SHIFT}+${keys.RETURN}`]: alert(process.env) // whatever

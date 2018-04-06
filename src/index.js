@@ -13,7 +13,7 @@ const x11 = require('x11')
 let X
 
 const easeConfig = {
-  easing: 50,
+  easing: 20,
   frameRate: 30
 }
 
@@ -118,7 +118,7 @@ require('./xorg')(function (err, client, display) {
       win.bounds.size = ease(b.size, config.easing, config.frameRate)
       win.bounds.size.__proto__ = b.size
 
-      win.configure({ borderWidth: 1 })
+      win.configure({ borderWidth: config.borderWidth })
       win.on('focus', () => {
         if (_prevFocus) _prevFocus.set({ borderPixel: 0x0 })
         win.set({ borderPixel: 0xffff00 })
