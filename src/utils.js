@@ -86,7 +86,8 @@ const defaultConfig = {
   run: spawn,
   keys,
   borderWidth: 1,
-  launcher: 'dmenu_run'
+  launcher: 'dmenu_run',
+  terminal: getDefaultTerminal()
 }
 
 const stringToHex = (s = 'FFFFFF') =>
@@ -149,7 +150,6 @@ module.exports = {
   exec,
   find,
   getConfig,
-  getDefaultTerminal,
   isInstalled,
   relative,
   remove,

@@ -2,5 +2,5 @@
 
 set -eu
 
-Xephyr -ac -br -noreset -screen 1024x768 :2 &
-  DISPLAY=:2 node ./index.js
+Xephyr -ac -br -noreset -screen 1024x768 :4 &
+  DISPLAY=:4 node ./index.js

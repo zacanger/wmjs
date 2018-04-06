@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+const x11 = require('x11')
 const Layout = require('./layout')
 const u = require('./utils')
 const ease = require('vec2-easing')
@@ -7,8 +8,6 @@ const isEmpty = require('zeelib/lib/is-empty').default
 
 const spawn = u.spawn
 
-const term = u.getDefaultTerminal()
-const x11 = require('x11')
 // let X
 
 const easeConfig = {
@@ -17,6 +16,7 @@ const easeConfig = {
 }
 
 const config = Object.assign({}, easeConfig, u.getConfig())
+const term = config.terminal
 // const KEYS = config.keys
 
 // require('./xorg')(function (err, client, display) {
@@ -185,6 +185,7 @@ require('./xorg')((err, client) => {
     if (ev.down) l.move(-1)
   })
 
+  // super-right
   rw.onKey(0x41, 114, (ev) => {
     if (ev.down) l.move(1)
   })

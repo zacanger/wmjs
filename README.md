@@ -95,6 +95,7 @@ module.exports = ({ keys, run, defaults }) => ({
   },
   // when truthy, logs go to `/tmp/wmjs-${DATE-TIMESTAMP}.log`
   debugLog: false, // doesn't do anything yet
+  terminal: 'xterm', // terminal to spawn
 })
 ```
 
@@ -138,10 +139,12 @@ Pretty much everything.
 * Properly set wmname (NETWM, see EWMH/wm-spec)
 * Tiling:
   * Automatic works, but it's bad
-  * Make manual work also
+  * Make manual work also (like in i3)
   * Resize with keybinds
   * Switch focus with keybinds
-  * Saved layouts? (Probably not)
+    * There's code for this now, but it's super+arrows
+  * Move windows with keybinds
+    * There's code for this now, but it's not mapped to anything real I think?
 
 #### Config Things
 
