@@ -10,7 +10,7 @@ const spawn = u.spawn
 const dmenu = 'dmenu_run'
 const term = u.getDefaultTerminal()
 const x11 = require('x11')
-let X
+// let X
 
 const easeConfig = {
   easing: 20,
@@ -18,9 +18,10 @@ const easeConfig = {
 }
 
 const config = Object.assign({}, easeConfig, u.getConfig())
-const KEYS = config.keys
+// const KEYS = config.keys
 
-require('./xorg')(function (err, client, display) {
+// require('./xorg')(function (err, client, display) {
+require('./xorg')((err, client) => {
   if (err) throw err
 
   let rw = client.root, _prevFocus
@@ -31,6 +32,7 @@ require('./xorg')(function (err, client, display) {
 
   // focus follows mouse
   mouse.change(() => {
+    // eslint-disable-next-line guard-for-in
     for (let i in l.tiles) {
       let v = l.tiles[i]
       if (v && v.bounds && v.bounds.contains(mouse)) {
@@ -114,8 +116,10 @@ require('./xorg')(function (err, client, display) {
       // add to current layout
       let b = win.bounds
       win.bounds = ease(b, config.easing, config.frameRate)
+      // eslint-disable-next-line no-proto
       win.bounds.__proto__ = b
       win.bounds.size = ease(b.size, config.easing, config.frameRate)
+      // eslint-disable-next-line no-proto
       win.bounds.size.__proto__ = b.size
 
       win.configure({ borderWidth: config.borderWidth })

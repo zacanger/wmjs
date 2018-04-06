@@ -26,7 +26,8 @@ module.exports = function (cb) {
       // wid = X.AllocID()
       // X.CreateWindow(wid)
     }
-    return all[wid] = new Window(wid)
+    all[wid] = new Window(wid)
+    return all[wid]
   }
 
   util.inherits(Window, EventEmitter)

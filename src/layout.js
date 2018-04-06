@@ -12,7 +12,7 @@ function Layout (root) {
   this.root = root
   this.all = {}
   this.tiles = []
-  this.focused
+  this.focused = null
   this.tiling = true
   this.delay = 200
   this.layouts = [tileLayout]
@@ -38,7 +38,7 @@ l.add = function (win) {
     // really, should use FocusChange here,
     // but I don't know how to distinguish between
     // getting and loosing focus.
-    win.on('focus', function (ev) {
+    win.on('focus', () => {
       // if the window is mapped
       win.raise()
     })

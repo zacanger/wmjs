@@ -103,6 +103,7 @@ const getConfig = () => {
 }
 
 function each (obj, iter) {
+  // eslint-disable-next-line guard-for-in
   for (let k in obj) iter(obj[k], k, obj)
 }
 
@@ -137,9 +138,9 @@ function swap (ary, a, b) {
 function relative (ary, item, dir) {
   let i = ary.indexOf(item)
   if (~i) {
-    i = i + dir
+    i += dir
     if (i < 0) i = ary.length + i
-    if (i >= ary.length) i = i - ary.length
+    if (i >= ary.length) i -= ary.length
     const w = ary[i]
     return w
   }
