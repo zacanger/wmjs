@@ -2,18 +2,17 @@
 
 [WIP]
 
-Tiling X window manager in Node, emphasizing Configuration Over Convention.
+Tiling X window manager in Node.
 
 ![screenshot](http://zacanger.com/assets/wmjs.png)
 
 * [Changelog](./CHANGES.md)
-* [Roadmap](./TODO.md)
 
 --------
 
 ## Known Issues
 
-Pretty much nothing actually works.
+Lots.
 
 ## Installation
 
@@ -21,16 +20,16 @@ Pretty much nothing actually works.
 
 ## Usage
 
-This is pretty crappy, right now. To check it out, clone this repo and do
-`./run.sh` (you'll need to have Xephyr installed). To stop that, `./stop.sh`.
+I wouldn't recommend using this as your main WM just yet. To check it out, clone
+this repo and do `./run.sh` (you'll need to have Xephyr installed). To stop
+that, `./stop.sh`.
 
 To use with `startx`, put something like this in your `~/.xinitrc`:
 
 ```
 #!/bin/sh
 
-xrdb -merge ~/.Xresources
-exec wmjs # add this line
+exec wmjs
 ```
 
 If you use a graphical session manager, you'll need a file under
@@ -81,17 +80,20 @@ const alert = require('alert-node')
 
 module.exports = ({ keys, run, defaults }) => ({
   ...defaults,
-  modKey: keys.ALT, // main mod key
+  modKey: keys.SUPER, // main mod key // doesn't do anything yet
   startupPrograms: [ // an array of things to spawn on start
     'xflux -z 84047',
-    'dropbox-cli start'
+    'dropbox-cli start',
+    'compton -b'
   ],
   borderWidth: 1, // width of window borders
   borderColor: 'FFFFFF', // color for borders (hex)
-  keybinds: {
+  keybinds: { // doesn't do anything yet
     [`${keys.SUPER}+${keys.SPACE}`]: run('dmenu_run'),
     [`${keys.SUPER}+${keys.SHIFT}+${keys.RETURN}`]: alert(process.env) // whatever
-  }
+  },
+  // when truthy, logs go to `/tmp/wmjs-${DATE-TIMESTAMP}.log`
+  debugLog: false, // doesn't do anything yet
 })
 ```
 
@@ -125,6 +127,34 @@ managers.
   * Alternatives: mplayer
 * Terminal emulator: st
   * Alternatives: urxvt, rxvt, xterm
+
+## TODO
+
+Pretty much everything.
+
+* Automatically install xsession file, add to alternatives, and install icon
+* Make an icon
+* Tiling:
+  * Automatic works, but it's bad
+  * Make manual work also
+  * Resize with keybinds
+  * Switch focus with keybinds
+  * Saved layouts? (Probably not)
+
+#### Config Things
+
+All default keybinds should rely on modKey (which we'll default to SUPER, which
+is the Windows key on many keyboards). We should keep default keybinds minimal.
+
+```
+MODKEY+SPACE: dmenu_run
+MODKEY+RETURN: x-terminal-emulator
+MODKEY+ARROWS: snap to corner (quarter of screen)
+MODKEY+SHIFT+ARROWS: snap to halves of screen
+```
+
+Configs should be hot reloaded (shouldn't need to restart the WM to reload
+config).
 
 ## License
 
