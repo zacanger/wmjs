@@ -85,7 +85,8 @@ const keys = {
 const defaultConfig = {
   run: spawn,
   keys,
-  borderWidth: 1
+  borderWidth: 1,
+  launcher: 'dmenu_run'
 }
 
 const stringToHex = (s = 'FFFFFF') =>
@@ -102,53 +103,49 @@ const getConfig = () => {
   }
 }
 
-function each (obj, iter) {
-  // eslint-disable-next-line guard-for-in
-  for (let k in obj) iter(obj[k], k, obj)
+const remove = (xs, item) => {
+  let i = xs.indexOf(item)
+  if (~i) xs.splice(i, 1)
 }
 
-function remove (array, item) {
-  let i = array.indexOf(item)
-  if (~i) array.splice(i, 1)
-}
-
-function find (ary, test) {
-  for (let i in ary) {
-    if (test(ary[i], i, ary)) return ary[i]
+const find = (xs, test) => {
+  for (let i in xs) {
+    if (test(xs[i], i, xs)) {
+      return xs[i]
+    }
   }
 }
 
-function swap (ary, a, b) {
-  let i = ary.indexOf(a)
-  let j = ary.indexOf(b)
+const swap = (xs, a, b) => {
+  let i = xs.indexOf(a)
+  let j = xs.indexOf(b)
   // if the window is the first or last, do not swap,
   // instead shift/pop so that overall order is preserved.
 
-  if (i === 0 && j === ary.length - 1) {
-    ary.push(ary.shift())
-  } else if (j === 0 && i === ary.length - 1) {
-    ary.unshift(ary.pop())
+  if (i === 0 && j === xs.length - 1) {
+    xs.push(xs.shift())
+  } else if (j === 0 && i === xs.length - 1) {
+    xs.unshift(xs.pop())
   } else {
-    ary[i] = b
-    ary[j] = a
+    xs[i] = b
+    xs[j] = a
   }
-  return ary
+  return xs
 }
 
-function relative (ary, item, dir) {
-  let i = ary.indexOf(item)
+const relative = (xs, item, dir) => {
+  let i = xs.indexOf(item)
   if (~i) {
     i += dir
-    if (i < 0) i = ary.length + i
-    if (i >= ary.length) i -= ary.length
-    const w = ary[i]
+    if (i < 0) i = xs.length + i
+    if (i >= xs.length) i -= xs.length
+    const w = xs[i]
     return w
   }
 }
 
 module.exports = {
   blowUp,
-  each,
   exec,
   find,
   getConfig,

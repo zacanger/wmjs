@@ -7,7 +7,6 @@ const isEmpty = require('zeelib/lib/is-empty').default
 
 const spawn = u.spawn
 
-const dmenu = 'dmenu_run'
 const term = u.getDefaultTerminal()
 const x11 = require('x11')
 // let X
@@ -173,7 +172,7 @@ require('./xorg')((err, client) => {
 
   // super-Space
   rw.onKey(0x40, 65, (ev) => {
-    if (ev.down) spawn(dmenu)
+    if (ev.down) spawn(config.launcher)
   })
 
   // super-Left

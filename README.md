@@ -86,6 +86,7 @@ module.exports = ({ keys, run, defaults }) => ({
     'dropbox-cli start',
     'compton -b'
   ],
+  launcher: 'dmenu_run',
   borderWidth: 1, // width of window borders
   borderColor: 'FFFFFF', // color for borders (hex)
   keybinds: { // doesn't do anything yet
