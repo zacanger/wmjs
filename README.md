@@ -1,5 +1,7 @@
 # wmjs
 
+![icon](/icon.png?raw=true)
+
 [WIP]
 
 Tiling X window manager in Node.
