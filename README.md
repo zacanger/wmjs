@@ -6,7 +6,7 @@
 
 Tiling X window manager in Node.
 
-![screenshot](http://zacanger.com/assets/wmjs.png)
+![screenshot](/screenshot.png?raw=true)
 
 * [Changelog](./CHANGES.md)
 
