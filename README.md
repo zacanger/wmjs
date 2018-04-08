@@ -103,15 +103,6 @@ module.exports = ({ keys, run, defaults }) => ({
 If no config file is provided, we just use the defaults. The config file should
 use CommonJS modules, at least until Node natively supports ESM.
 
-## Prior Art
-
-This is heavily based on code from the following projects:
-
-* [tiles](https://github.com/dominictarr/tiles)
-* [node-tinywm](https://github.com/Airblader/node-tinywm), which is an
-  implementation of [tinywm](http://incise.org/tinywm.html)
-* example code from [x11](https://github.com/sidorares/node-x11)
-
 ## Recommended Applications
 
 You can use any programs you like, but these fit well with minimalistic window
@@ -129,7 +120,6 @@ managers.
 Pretty much everything.
 
 * Automatically install xsession file, add to alternatives (Debian), and install icon
-* Make an icon
 * Properly set wmname (NETWM, see EWMH/wm-spec)
 * Tiling:
   * Automatic works, but it's bad
@@ -154,6 +144,19 @@ MODKEY+SHIFT+ARROWS: snap to halves of screen
 
 Configs should be hot reloaded (shouldn't need to restart the WM to reload
 config).
+
+## Prior Art and Thanks
+
+Icon made using [make 8-bit art](https://make8bitart.com).
+
+wmjs is heavily based on code from the following projects:
+
+* [tiles](https://github.com/dominictarr/tiles)
+* [node-tinywm](https://github.com/Airblader/node-tinywm), which is an
+  implementation of [tinywm](http://incise.org/tinywm.html)
+* example code from [x11](https://github.com/sidorares/node-x11)
+* Inspiration from [i3](https://i3wm.org),
+  [catwm](https://github.com/pyknite/catwm), and tons of other awesome projects.
 
 ## License
 
