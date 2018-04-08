@@ -53,7 +53,8 @@ Where `/path/to/wmjs` is something like `/usr/local/bin/wmjs` (see `npm bin -g`)
 
 To run in Xephyr, you need Xephyr.
 
-You'll also need a terminal, and I recommend having `dmenu`.
+You'll also need a terminal and `dmenu` or some other launcher (see config
+below).
 
 ## Configuration
 
@@ -116,19 +117,12 @@ This is heavily based on code from the following projects:
 You can use any programs you like, but these fit well with minimalistic window
 managers.
 
-* Browser: Qutebrowser
-  * Alternatives: min, uzbl, dwb
-  * More extreme: w3m, Lynx, elinks
-* File manager: Ranger
-  * Alternatives: noice, rover, nnn
-* Editor: Neovim
-  * Alternatives: Vim, vi, Emacs
-* Audio player: Angrplayer
-  * Alternatives: moc, cmus, mplayer
-* Video: mpv
-  * Alternatives: mplayer
-* Terminal emulator: st
-  * Alternatives: urxvt, rxvt, xterm
+* Browser: Qutebrowser, uzbl, dwb, min, w3m, Lynx, elinks
+* File manager: Ranger, noice, rover, nnn
+* Editor: Neovim, Vim, vi, Emacs
+* Audio player: Angrplayer, moc, cmus, mplayer
+* Video: mpv, mplayer
+* Terminal emulator: st, urxvt
 
 ## TODO
 
