@@ -100,6 +100,7 @@ const getConfig = () => {
     userConfig.borderColor = stringToHex(userConfig.borderColor)
     return Object.assign({}, defaultConfig, userConfig)
   } catch (_) {
+    // in the future, log here if config.debugLog
     return defaultConfig
   }
 }

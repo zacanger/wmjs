@@ -105,7 +105,11 @@ require('./xorg')((err, client) => {
 
   if (!isEmpty(config.startupPrograms)) {
     config.startupPrograms.forEach((program) => {
-      spawn(program)
+      try {
+        spawn(program)
+      } catch (_) {
+        // in the future, we'll log here if config.debugLog
+      }
     })
   }
 

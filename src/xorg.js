@@ -2,7 +2,6 @@
 // my aim to be to make it browserify where possible,
 // so that your expectations from web development apply.
 
-const util = require('util')
 const EventEmitter = require('events').EventEmitter
 const x11 = require('x11')
 const Rec2 = require('rec2')
@@ -12,6 +11,18 @@ const each = require('zeelib/lib/each').default
 module.exports = (cb) => {
   let X
   let all = {}
+
+  class Window extends EventEmitter {
+    constructor (wid, opts) {
+      super()
+      if (wid == null) {
+        this.id = X.AllocID()
+        X.CreateWindow(this.id, opts)
+      }
+      this.id = wid
+      X.event_consumers[wid] = X
+    }
+  }
 
   function createWindow (wid) {
     if (wid != null && typeof wid !== 'number') {
@@ -27,17 +38,6 @@ module.exports = (cb) => {
     }
     all[wid] = new Window(wid)
     return all[wid]
-  }
-
-  util.inherits(Window, EventEmitter)
-
-  function Window (wid, opts) {
-    if (wid == null) {
-      this.id = X.AllocID()
-      X.CreateWindow(this.id, opts)
-    }
-    this.id = wid
-    X.event_consumers[wid] = X
   }
 
   const w = Window.prototype
