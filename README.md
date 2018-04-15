@@ -125,6 +125,8 @@ Pretty much everything.
 * Properly set wmname (NETWM, see EWMH/wm-spec)
 * Tiling:
   * Automatic works, but it's bad
+    * Remove the buggy existing code
+    * Do what `catwm` does -- assume a primary window and other windows
   * Make manual work also (like in i3)
   * Resize with keybinds
   * Switch focus with keybinds
