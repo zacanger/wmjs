@@ -16,6 +16,12 @@ Tiling X window manager in Node.
 
 Lots.
 
+## What Works
+
+* Tiling, sort of, but I wouldn't recommend opening more than three windows
+* Closing windows, but reopening them is weird
+* Launching programs (if you have `dmenu` installed, or see the config section)
+
 ## Installation
 
 `npm i -g wmjs`
