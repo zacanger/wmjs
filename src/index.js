@@ -25,7 +25,7 @@ require('./xorg')((err, client) => {
 
   let rw = client.root, _prevFocus
   let mouse = client.mouse
-  let layouts = [new Layout(rw)]
+  let layouts = [ new Layout(rw) ]
 
   let l = layouts[0]
 
