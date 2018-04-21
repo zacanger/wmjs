@@ -34,13 +34,13 @@
     "vec2-easing": "1.0.1",
     "vec2-layout": "0.1.1",
     "x11": "2.3.0",
-    "zeelib": "6.1.10"
+    "zeelib": "6.1.11"
   },
   "devDependencies": {
     "babel-eslint": "8.2.3",
     "eslint": "4.19.1",
-    "eslint-config-zacanger": "3.1.0",
-    "eslint-plugin-babel": "5.0.0",
+    "eslint-config-zacanger": "3.1.1",
+    "eslint-plugin-babel": "5.1.0",
     "eslint-plugin-import": "2.11.0",
     "eslint-plugin-node": "6.0.1",
     "eslint-plugin-promise": "3.7.0",
