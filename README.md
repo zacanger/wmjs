@@ -129,6 +129,7 @@ Pretty much everything.
 
 * Automatically install xsession file, add to alternatives (Debian), and install icon
 * Properly set wmname (NETWM, see EWMH/wm-spec)
+* Workspaces
 * Tiling:
   * Automatic works, but it's bad
     * Remove the buggy existing code
