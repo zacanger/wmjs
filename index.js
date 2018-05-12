@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const exit = require('zeelib/lib/exit').default
+const exit = require('zeelib/lib/exit')
 
 if (module.parent) {
   console.error('Please install wmjs globally')

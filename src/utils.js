@@ -1,7 +1,7 @@
 const cp = require('child_process')
-// const exit = require('zeelib/lib/exit').default
-const id = require('zeelib/lib/id').default
-const getHome = require('zeelib/lib/get-user-home').default
+// const exit = require('zeelib/lib/exit')
+const id = require('zeelib/lib/id')
+const getHome = require('zeelib/lib/get-user-home')
 
 const spawn = (cmd) => {
   let args = cmd.split(/\s+/)

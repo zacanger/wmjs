@@ -4,7 +4,7 @@ const x11 = require('x11')
 const Layout = require('./layout')
 const u = require('./utils')
 const ease = require('vec2-easing')
-const isEmpty = require('zeelib/lib/is-empty').default
+const isEmpty = require('zeelib/lib/is-empty')
 
 const spawn = u.spawn
 

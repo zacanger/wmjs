@@ -6,7 +6,7 @@ const EventEmitter = require('events').EventEmitter
 const x11 = require('x11')
 const Rec2 = require('rec2')
 const Vec2 = require('vec2')
-const each = require('zeelib/lib/each').default
+const each = require('zeelib/lib/each')
 
 module.exports = (cb) => {
   let X

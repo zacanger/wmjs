@@ -127,8 +127,6 @@ managers.
 
 Pretty much everything.
 
-* Automatically install xsession file, add to alternatives (Debian), and install icon
-* Properly set wmname (NETWM, see EWMH/wm-spec)
 * Workspaces
 * Tiling:
   * Automatic works, but it's bad
@@ -140,6 +138,8 @@ Pretty much everything.
     * There's code for this now, but it's super+arrows
   * Move windows with keybinds
     * There's code for this now, but it's not mapped to anything real I think?
+* Automatically install xsession file, add to alternatives (Debian), and install icon
+* Properly set wmname (NETWM, see EWMH/wm-spec)
 
 #### Config Things
 
