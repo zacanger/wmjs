@@ -104,7 +104,8 @@ module.exports = ({ keys, run, defaults }) => ({
   },
   // when truthy, logs go to `/tmp/wmjs-${DATE-TIMESTAMP}.log`
   debugLog: false, // doesn't do anything yet
-  terminal: 'xterm', // terminal to spawn
+  terminal: 'xterm', // terminal to spawn,
+  focusFollowsMouse: false // true by default
 })
 ```
 

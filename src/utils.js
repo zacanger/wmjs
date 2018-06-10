@@ -87,7 +87,8 @@ const defaultConfig = {
   keys,
   borderWidth: 1,
   launcher: 'dmenu_run',
-  terminal: getDefaultTerminal()
+  terminal: getDefaultTerminal(),
+  focusFollowsMouse: true
 }
 
 const stringToHex = (s = 'FFFFFF') =>

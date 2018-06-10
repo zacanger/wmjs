@@ -29,17 +29,18 @@ require('./xorg')((err, client) => {
 
   let l = layouts[0]
 
-  // focus follows mouse
-  mouse.change(() => {
-    // eslint-disable-next-line guard-for-in
-    for (let i in l.tiles) {
-      let v = l.tiles[i]
-      if (v && v.bounds && v.bounds.contains(mouse)) {
-        if (v !== l.focused) v.focus()
+  if (config.focusFollowsMouse) {
+    // focus follows mouse
+    mouse.change(() => {
+      // eslint-disable-next-line guard-for-in
+      for (let i in l.tiles) {
+        let v = l.tiles[i]
+        if (v && v.bounds && v.bounds.contains(mouse)) {
+          if (v !== l.focused) v.focus()
+        }
       }
-    }
-  })
-
+    })
+  }
   /*
   client.client.require('randr', (Randr) => {
     Randr.SelectInput(rw.id, Randr.NotifyMask.ScreenChange)
