@@ -1,6 +1,6 @@
 # wmjs
 
-![icon](/icon.png?raw=true)
+![logo](/logo.png?raw=true)
 
 [WIP]
 
@@ -158,8 +158,6 @@ Configs should be hot reloaded (shouldn't need to restart the WM to reload
 config).
 
 ## Prior Art and Thanks
-
-Icon made using [make 8-bit art](https://make8bitart.com).
 
 wmjs is heavily based on code from the following projects:
 
