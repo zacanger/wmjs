@@ -23,9 +23,10 @@ const term = config.terminal
 require('./xorg')((err, client) => {
   if (err) throw err
 
-  let rw = client.root, _prevFocus
-  let mouse = client.mouse
-  let layouts = [ new Layout(rw) ]
+  const rw = client.root
+  let _prevFocus
+  const mouse = client.mouse
+  const layouts = [ new Layout(rw) ]
 
   let l = layouts[0]
 
@@ -33,8 +34,8 @@ require('./xorg')((err, client) => {
     // focus follows mouse
     mouse.change(() => {
       // eslint-disable-next-line guard-for-in
-      for (let i in l.tiles) {
-        let v = l.tiles[i]
+      for (const i in l.tiles) {
+        const v = l.tiles[i]
         if (v && v.bounds && v.bounds.contains(mouse)) {
           if (v !== l.focused) v.focus()
         }
@@ -118,7 +119,7 @@ require('./xorg')((err, client) => {
     // load the window's properties, and then lay it out.
     win.load(() => {
       // add to current layout
-      let b = win.bounds
+      const b = win.bounds
       win.bounds = ease(b, config.easing, config.frameRate)
       // eslint-disable-next-line no-proto
       win.bounds.__proto__ = b

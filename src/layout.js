@@ -19,7 +19,7 @@ module.exports = class Layout {
   }
 
   add (win) {
-    let self = this
+    const self = this
     this.all[win.id] = win
 
     if (win.bounds && win.attrs && !win.attrs.overrideRedirect) {
@@ -59,7 +59,7 @@ module.exports = class Layout {
   }
 
   cycle (dir) { // 1 or -1
-    let f = u.relative(this.tiles, this.focused, dir || 1)
+    const f = u.relative(this.tiles, this.focused, dir || 1)
     if (f) this.focused = f.focus()
     this.layout()
     return this
@@ -68,7 +68,7 @@ module.exports = class Layout {
   move (dir) { // 1 or -1
     this._delay = Date.now() + this.delay
     if (!this.focused) this.focused = this.tiles[0].focus()
-    let _focused = u.relative(this.tiles, this.focused, dir)
+    const _focused = u.relative(this.tiles, this.focused, dir)
     u.swap(this.tiles, this.focused, _focused)
     //    focused = _focused.focus()
     this.layout()

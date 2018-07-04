@@ -4,7 +4,7 @@
 // state.setState({ foo: 'bar' })
 
 const store = (state = {}) => {
-  let ls = []
+  const ls = []
 
   return {
     subscribe: (l) => {

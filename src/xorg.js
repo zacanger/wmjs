@@ -9,8 +9,9 @@ const Vec2 = require('vec2')
 const each = require('zeelib/lib/each')
 
 module.exports = (cb) => {
+  // eslint-disable-next-line prefer-const
   let X
-  let all = {}
+  const all = {}
 
   class Window extends EventEmitter {
     constructor (wid, opts) {
@@ -55,14 +56,14 @@ module.exports = (cb) => {
 
   each(methods, function (_name, name) {
     w[_name] = function () {
-      let args = [].slice.call(arguments)
+      const args = [].slice.call(arguments)
       args.unshift(this.id)
       return X[name].apply(X, args)
     }
   })
 
   w.load = function (cb) {
-    let self = this
+    const self = this
 
     this.get(function (err, attrs) {
       self.attrs = attrs
@@ -71,7 +72,7 @@ module.exports = (cb) => {
 
     this.getBounds(function (err, bounds) {
       // self.bounds = bounds
-      let b = self.bounds = new Rec2(bounds.posX, bounds.posY, bounds.width, bounds.height)
+      const b = self.bounds = new Rec2(bounds.posX, bounds.posY, bounds.width, bounds.height)
       b.change(function () {
         self.move(b.x, b.y)
       })
@@ -84,7 +85,7 @@ module.exports = (cb) => {
   }
 
   w.children = function (cb) {
-    let self = this
+    const self = this
     self._children = []
     this.tree(function (err, tree) {
       let n = tree.children.length
@@ -95,7 +96,7 @@ module.exports = (cb) => {
       }
 
       tree.children.forEach((wid) => {
-        let w = createWindow(wid).load((err) => {
+        const w = createWindow(wid).load((err) => {
           if (err) next(err)
           self._children.push(w)
           next()
@@ -114,7 +115,7 @@ module.exports = (cb) => {
     return this
   }
 
-  let kb = {}
+  const kb = {}
 
   w.onKey = function (mod, key, listener) {
     kb[mod.toString('16') + '-' + key.toString(16)] = listener
@@ -178,12 +179,12 @@ module.exports = (cb) => {
       if (_ev === ev) return
       _ev = ev
 
-      let wid = (ev.wid1 || ev.wid)
+      const wid = (ev.wid1 || ev.wid)
       let win
 
       if (wid) win = createWindow(wid)
       if (ev.name === 'KeyPress' || ev.name === 'KeyRelease') {
-        let listener = kb[ev.buttons.toString(16) + '-' + ev.keycode.toString(16)]
+        const listener = kb[ev.buttons.toString(16) + '-' + ev.keycode.toString(16)]
         ev.down = ev.name === 'KeyPress'
         ev.up = !ev.down
         if (listener) listener(ev)

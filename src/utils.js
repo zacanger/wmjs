@@ -4,7 +4,7 @@ const id = require('zeelib/lib/id')
 const getHome = require('zeelib/lib/get-user-home')
 
 const spawn = (cmd) => {
-  let args = cmd.split(/\s+/)
+  const args = cmd.split(/\s+/)
   cmd = args.shift()
   cp.spawn(cmd, args)
 }
@@ -107,12 +107,12 @@ const getConfig = () => {
 }
 
 const remove = (xs, item) => {
-  let i = xs.indexOf(item)
+  const i = xs.indexOf(item)
   if (~i) xs.splice(i, 1)
 }
 
 const find = (xs, test) => {
-  for (let i in xs) {
+  for (const i in xs) {
     if (test(xs[i], i, xs)) {
       return xs[i]
     }
@@ -120,8 +120,8 @@ const find = (xs, test) => {
 }
 
 const swap = (xs, a, b) => {
-  let i = xs.indexOf(a)
-  let j = xs.indexOf(b)
+  const i = xs.indexOf(a)
+  const j = xs.indexOf(b)
   // if the window is the first or last, do not swap,
   // instead shift/pop so that overall order is preserved.
 
