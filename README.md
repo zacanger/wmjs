@@ -2,7 +2,7 @@
 
 ![logo](/logo.png?raw=true)
 
-[WIP]
+**[WIP]** only use this if you are very brave and don't need to get anything done.
 
 Tiling X window manager in Node.
 
