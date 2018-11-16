@@ -1,6 +1,6 @@
+const getTerm = require('get-term')
 const cp = require('child_process')
 // const exit = require('zeelib/lib/exit')
-const id = require('zeelib/lib/id')
 const getHome = require('zeelib/lib/get-user-home')
 
 const spawn = (cmd) => {
@@ -14,49 +14,6 @@ const spawn = (cmd) => {
 
 const exec = (cmd, opts) =>
   cp.execSync(cmd, opts).toString('utf8').trim()
-
-const terms = [
-  process.env.TERMINAL,
-  'x-terminal-emulator', // debian
-  'terminal', // arch, i think?
-
-  // fancy terminals
-  'Eterm',
-  'alacritty',
-  'aterm',
-  'eterm',
-  'gnome-terminal',
-  'guake',
-  'hyper',
-  'kitty',
-  'konsole',
-  'lilyterm',
-  'lxterminal',
-  'mate-terminal',
-  'mrxvt',
-  'qterminal',
-  'roxterm',
-  'sakura',
-  'terminator',
-  'terminix',
-  'terminology',
-  'termit',
-  'termite',
-  'tilda',
-  'tilix',
-  'xfce4-terminal',
-  'yakuake',
-
-  // less fancy terminals
-  'stterm', // debian
-  'st', // not-debian -- might conflict with the st server package...
-
-  // defaults
-  'urxvt',
-  'uxterm',
-  'rxvt',
-  'xterm'
-].filter(id)
 
 const blowUp = (err) => {
   if (!err) return
@@ -73,9 +30,6 @@ const isInstalled = (program) => {
   }
 }
 
-const getDefaultTerminal = () =>
-  terms[terms.map(isInstalled).findIndex(id)]
-
 const keys = {
   SUPER: 133,
   SPACE: 65,
@@ -87,7 +41,7 @@ const defaultConfig = {
   keys,
   borderWidth: 1,
   launcher: 'dmenu_run',
-  terminal: getDefaultTerminal(),
+  terminal: getTerm(),
   focusFollowsMouse: true
 }
 
