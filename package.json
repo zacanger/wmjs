@@ -29,23 +29,23 @@
     "x11"
   ],
   "dependencies": {
-    "get-term": "0.1.0",
+    "get-term": "1.0.0",
     "rec2": "1.2.0",
     "vec2": "1.6.0",
     "vec2-easing": "1.0.1",
     "vec2-layout": "0.1.1",
     "x11": "2.3.0",
-    "zeelib": "7.0.4"
+    "zeelib": "8.2.2"
   },
   "devDependencies": {
-    "babel-eslint": "8.2.5",
-    "eslint": "5.0.1",
-    "eslint-config-zacanger": "3.3.1",
-    "eslint-plugin-babel": "5.1.0",
-    "eslint-plugin-import": "2.13.0",
-    "eslint-plugin-node": "6.0.1",
-    "eslint-plugin-promise": "3.8.0",
-    "eslint-plugin-unicorn": "4.0.3"
+    "babel-eslint": "10.0.1",
+    "eslint": "5.9.0",
+    "eslint-config-zacanger": "3.4.1",
+    "eslint-plugin-babel": "5.3.0",
+    "eslint-plugin-import": "2.14.0",
+    "eslint-plugin-node": "8.0.0",
+    "eslint-plugin-promise": "4.0.1",
+    "eslint-plugin-unicorn": "6.0.1"
   },
   "engines": {
     "node": ">=8.0.0"

@@ -72,6 +72,7 @@ require('./xorg')((err, client) => {
   rw.set({ eventMask: EV }, (err) => {
     if (err && err.error === 10) {
       console.error('Another window manager is already running.')
+      // eslint-disable-next-line no-process-exit
       process.exit(1)
     }
   })
@@ -169,6 +170,7 @@ require('./xorg')((err, client) => {
   rw.onKey(0x40, 9, (ev) => {
     if (ev.down) {
       console.log('quiting...')
+      // eslint-disable-next-line no-process-exit
       process.exit(0)
     }
   })
@@ -216,6 +218,7 @@ require('./xorg')((err, client) => {
     if (l.tiles.length === 0) {
       if (layouts.length === 1) {
         console.log('all windows are closed')
+        // eslint-disable-next-line no-process-exit
         process.exit(0)
       }
       return closeLayout(ev)

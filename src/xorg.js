@@ -187,6 +187,7 @@ module.exports = (cb) => {
         const listener = kb[ev.buttons.toString(16) + '-' + ev.keycode.toString(16)]
         ev.down = ev.name === 'KeyPress'
         ev.up = !ev.down
+        // console.log({ ev })
         if (listener) listener(ev)
       }
 
