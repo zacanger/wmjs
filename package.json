@@ -30,6 +30,7 @@
   ],
   "dependencies": {
     "get-term": "1.0.0",
+    "keysym": "0.0.6",
     "rec2": "1.2.0",
     "vec2": "1.6.0",
     "vec2-easing": "1.0.1",

@@ -29,8 +29,8 @@ Lots.
 ## Usage
 
 I wouldn't recommend using this as your main WM just yet. To check it out, clone
-this repo and do `./run.sh` (you'll need to have Xephyr installed). To stop
-that, `./stop.sh`.
+this repo and `make run` (you'll need to have Xephyr installed). To stop
+that, `make stop`.
 
 To use with `startx`, put something like this in your `~/.xinitrc`:
 
@@ -162,6 +162,7 @@ config).
 wmjs is heavily based on code from the following projects:
 
 * [tiles](https://github.com/dominictarr/tiles)
+* [AirWM](https://github.com/airwm/airwm)
 * [node-tinywm](https://github.com/Airblader/node-tinywm), which is an
   implementation of [tinywm](http://incise.org/tinywm.html)
 * example code from [x11](https://github.com/sidorares/node-x11)
