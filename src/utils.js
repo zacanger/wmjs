@@ -1,4 +1,5 @@
 const getTerm = require('get-term')
+const isInstalled = require('is-program-installed')
 const cp = require('child_process')
 // const exit = require('zeelib/lib/exit')
 const getHome = require('zeelib/lib/get-user-home')
@@ -19,15 +20,6 @@ const blowUp = (err) => {
   if (!err) return
   console.trace(err)
   // exit(err.code || 1)
-}
-
-const isInstalled = (program) => {
-  try {
-    exec(`hash ${program} 2>/dev/null`)
-    return true
-  } catch (_) {
-    return false
-  }
 }
 
 const keys = {
