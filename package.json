@@ -29,20 +29,20 @@
     "x11"
   ],
   "dependencies": {
-    "get-term": "1.0.0",
-    "is-program-installed": "1.1.0",
+    "get-term": "1.0.2",
+    "is-program-installed": "1.1.1",
     "keysym": "0.0.6",
     "rec2": "1.2.0",
     "vec2": "1.6.0",
     "vec2-easing": "1.0.1",
     "vec2-layout": "0.1.1",
     "x11": "2.3.0",
-    "zeelib": "8.2.2"
+    "zeelib": "8.2.3"
   },
   "devDependencies": {
     "babel-eslint": "10.0.1",
     "eslint": "5.9.0",
-    "eslint-config-zacanger": "3.4.1",
+    "eslint-config-zacanger": "3.4.2",
     "eslint-plugin-babel": "5.3.0",
     "eslint-plugin-import": "2.14.0",
     "eslint-plugin-node": "8.0.0",
