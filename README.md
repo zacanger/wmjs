@@ -128,6 +128,7 @@ managers.
 
 Pretty much everything.
 
+* Less bad key-handling code
 * Workspaces
 * Tiling:
   * Automatic works, but it's bad
