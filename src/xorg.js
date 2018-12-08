@@ -156,7 +156,7 @@ module.exports = (cb) => {
     const rid = display.screen[0].root
 
     const mouse = new Vec2(0, 0)
-    mouse.change(function () {
+    mouse.change(() => {
       // console.log(mouse.toJSON())
     })
 
@@ -180,9 +180,8 @@ module.exports = (cb) => {
       _ev = ev
 
       const wid = (ev.wid1 || ev.wid)
-      let win
+      const win = wid ? createWindow(wid) : undefined
 
-      if (wid) win = createWindow(wid)
       if (ev.name === 'KeyPress' || ev.name === 'KeyRelease') {
         const listener = kb[ev.buttons.toString(16) + '-' + ev.keycode.toString(16)]
         ev.down = ev.name === 'KeyPress'
@@ -191,13 +190,21 @@ module.exports = (cb) => {
         if (listener) listener(ev)
       }
 
-      if (ev.name === 'DestroyNotify') delete all[ev.wid1]
+      if (ev.name === 'DestroyNotify') {
+        delete all[ev.wid1]
+      }
 
-      if (!root) throw new Error('no root')
+      if (!root) {
+        throw new Error('no root')
+      }
 
-      if (ev.name === 'EnterWindow') ev.name = 'MouseOver'
+      if (ev.name === 'EnterWindow') {
+        ev.name = 'MouseOver'
+      }
 
-      if (win) win.emit(ev.name, ev)
+      if (win) {
+        win.emit(ev.name, ev)
+      }
 
       root.emit(ev.name, ev, win)
     })
