@@ -7,6 +7,7 @@ const x11 = require('x11')
 const Rec2 = require('rec2')
 const Vec2 = require('vec2')
 const each = require('zeelib/lib/each')
+const log = require('./log')
 
 module.exports = (cb) => {
   // eslint-disable-next-line prefer-const
@@ -157,7 +158,7 @@ module.exports = (cb) => {
 
     const mouse = new Vec2(0, 0)
     mouse.change(() => {
-      // console.log(mouse.toJSON())
+      // log.debug(mouse.toJSON())
     })
 
     setInterval(() => {
@@ -186,7 +187,7 @@ module.exports = (cb) => {
         const listener = kb[ev.buttons.toString(16) + '-' + ev.keycode.toString(16)]
         ev.down = ev.name === 'KeyPress'
         ev.up = !ev.down
-        // console.log({ ev })
+        // log.debug(ev)
         if (listener) listener(ev)
       }
 
@@ -209,6 +210,6 @@ module.exports = (cb) => {
       root.emit(ev.name, ev, win)
     })
   }).on('error', (err) => {
-    console.error(err.stack)
+    log.error(err.stack)
   })
 }

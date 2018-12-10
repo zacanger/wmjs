@@ -5,6 +5,7 @@ const Layout = require('./layout')
 const u = require('./utils')
 const ease = require('vec2-easing')
 const isEmpty = require('zeelib/lib/is-empty')
+const log = require('./log')
 
 const spawn = u.spawn
 
@@ -71,7 +72,7 @@ require('./xorg')((err, client) => {
 
   rw.set({ eventMask: EV }, (err) => {
     if (err && err.error === 10) {
-      console.error('Another window manager is already running.')
+      log.error('Another window manager is already running.')
       // eslint-disable-next-line no-process-exit
       process.exit(1)
     }
@@ -82,11 +83,11 @@ require('./xorg')((err, client) => {
 
   rw.on('KeyPress', (ev) => {
     pressed.push(ev.keycode)
-    console.log(pressed)
+    log.debug(pressed)
   })
 
   rw.on('KeyRelease', () => {
-    console.log('KeyRelease')
+    log.debug('KeyRelease')
     if (pressed.includes(KEYS.SUPER)) {
       if (pressed.includes(KEYS.SPACE)) {
         exec('dmenu')
@@ -111,10 +112,10 @@ require('./xorg')((err, client) => {
       try {
         const prg = spawn(program)
         prg.on('error', (err) => {
-          console.log(err)
+          log.error(err.message || err)
         })
-      } catch (_) {
-        // in the future, we'll log here if config.debugLog
+      } catch (e) {
+        log.error(e)
       }
     })
   }
@@ -172,7 +173,7 @@ require('./xorg')((err, client) => {
   // super-Esc
   rw.onKey(0x40, 9, (ev) => {
     if (ev.down) {
-      console.log('quiting...')
+      log.debug('quiting...')
       // eslint-disable-next-line no-process-exit
       process.exit(0)
     }
@@ -220,7 +221,7 @@ require('./xorg')((err, client) => {
   function close (ev) {
     if (l.tiles.length === 0) {
       if (layouts.length === 1) {
-        console.log('all windows are closed')
+        log.debug('all windows are closed')
         // eslint-disable-next-line no-process-exit
         process.exit(0)
       }
