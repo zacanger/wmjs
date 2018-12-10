@@ -7,7 +7,7 @@ const getHome = require('zeelib/lib/get-user-home')
 const spawn = (cmd) => {
   const args = cmd.split(/\s+/)
   cmd = args.shift()
-  cp.spawn(cmd, args)
+  return cp.spawn(cmd, args)
 }
 
 // const execa = require('execa')
