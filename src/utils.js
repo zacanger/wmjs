@@ -19,7 +19,7 @@ const exec = (cmd, opts) =>
 
 const blowUp = (err) => {
   if (!err) return
-  log.error(err.message || error)
+  log.error(err.message || err)
   // exit(err.code || 1)
 }
 

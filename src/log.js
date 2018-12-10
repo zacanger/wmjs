@@ -16,7 +16,7 @@ const write = (s = '') => {
   if (!existsSync(logPath)) {
     mkdirSync(logPath)
   }
-  appendFile(logFile, s, (err ='') => {
+  appendFile(logFile, s, (err = '') => {
     write(error(err ? err.message : err) + '\n')
   })
 }
