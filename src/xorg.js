@@ -158,7 +158,7 @@ module.exports = (cb) => {
 
     const mouse = new Vec2(0, 0)
     mouse.change(() => {
-      // log.debug(mouse.toJSON())
+      // console.log(mouse.toJSON())
     })
 
     setInterval(() => {
@@ -187,7 +187,7 @@ module.exports = (cb) => {
         const listener = kb[ev.buttons.toString(16) + '-' + ev.keycode.toString(16)]
         ev.down = ev.name === 'KeyPress'
         ev.up = !ev.down
-        // log.debug(ev)
+        // console.log(ev)
         if (listener) listener(ev)
       }
 

@@ -35,7 +35,8 @@ const defaultConfig = {
   borderWidth: 1,
   launcher: 'dmenu_run',
   terminal: getTerm(),
-  focusFollowsMouse: true
+  focusFollowsMouse: true,
+  log: false
 }
 
 const stringToHex = (s = 'FFFFFF') =>

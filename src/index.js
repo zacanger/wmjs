@@ -83,11 +83,11 @@ require('./xorg')((err, client) => {
 
   rw.on('KeyPress', (ev) => {
     pressed.push(ev.keycode)
-    log.debug(pressed)
+    if (config.log) log.debug(pressed)
   })
 
   rw.on('KeyRelease', () => {
-    log.debug('KeyRelease')
+    if (config.log) log.debug('KeyRelease')
     if (pressed.includes(KEYS.SUPER)) {
       if (pressed.includes(KEYS.SPACE)) {
         exec('dmenu')
@@ -173,7 +173,7 @@ require('./xorg')((err, client) => {
   // super-Esc
   rw.onKey(0x40, 9, (ev) => {
     if (ev.down) {
-      log.debug('quiting...')
+      if (config.log) log.debug('quiting...')
       // eslint-disable-next-line no-process-exit
       process.exit(0)
     }
@@ -221,7 +221,7 @@ require('./xorg')((err, client) => {
   function close (ev) {
     if (l.tiles.length === 0) {
       if (layouts.length === 1) {
-        log.debug('all windows are closed')
+        if (config.log) log.debug('all windows are closed')
         // eslint-disable-next-line no-process-exit
         process.exit(0)
       }
