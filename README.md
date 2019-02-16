@@ -8,7 +8,7 @@ Tiling X window manager in Node.
 
 ![screenshot](/screenshot.png?raw=true)
 
-* [Changelog](./CHANGES.md)
+* [Changelog](./CHANGELOG.md)
 
 --------
 
