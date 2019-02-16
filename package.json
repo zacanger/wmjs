@@ -1,10 +1,10 @@
 {
   "name": "wmjs",
   "description": "[WIP] Tiling X window manager in Node",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "author": {
-    "name": "Zac Anger",
     "email": "zac@zacanger.com",
+    "name": "Zac Anger",
     "url": "http://zacanger.com"
   },
   "license": "MIT",
@@ -23,9 +23,9 @@
   },
   "bugs": "https://github.com/zacanger/wmjs/issues",
   "keywords": [
-    "window-manager",
-    "window",
     "manager",
+    "window",
+    "window-manager",
     "wm",
     "x",
     "x11"
