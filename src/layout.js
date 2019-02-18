@@ -15,7 +15,6 @@ module.exports = class Layout {
     this.focused = null
     this.tiling = true
     this.delay = 200
-    this.layouts = [ tileLayout ]
   }
 
   add (win) {
@@ -77,7 +76,7 @@ module.exports = class Layout {
   }
 
   layout () {
-    this.layouts[0].call(this)
+    tileLayout.call(this)
   }
 
   closeAll () {

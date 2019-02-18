@@ -9,6 +9,9 @@ const warn = level('WARN')
 const info = level('INFO')
 const debug = level('DEBUG')
 
+const getMessage = (obj = '') =>
+  (obj && (obj.message || obj.reason)) || obj
+
 const write = (s = '') => {
   if (!s || /: null/.test(s)) {
     return
@@ -17,7 +20,10 @@ const write = (s = '') => {
     mkdirSync(logPath)
   }
   appendFile(logFile, s, (err = '') => {
-    write(error(err ? err.message : err) + '\n')
+    const toWrite = getMessage(err)
+    if (toWrite) {
+      write(error(toWrite) + '\n')
+    }
   })
 }
 
