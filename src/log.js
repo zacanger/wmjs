@@ -10,7 +10,7 @@ const info = level('INFO')
 const debug = level('DEBUG')
 
 const getMessage = (obj = '') =>
-  (obj && (obj.message || obj.reason)) || obj
+  (obj && (obj.stack || obj.message || obj.reason)) || obj
 
 const write = (s = '') => {
   if (!s || /: null/.test(s)) {

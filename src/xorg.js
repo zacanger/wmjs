@@ -9,6 +9,7 @@ module.exports = (cb) => {
   // eslint-disable-next-line prefer-const
   let X
   const all = {}
+  const kb = {}
 
   class Window extends EventEmitter {
     constructor (wid, opts) {
@@ -20,7 +21,112 @@ module.exports = (cb) => {
       this.id = wid
       X.event_consumers[wid] = X
     }
+
+    load (cb) {
+      const self = this
+
+      this.get(function (err, attrs) {
+        self.attrs = attrs
+        if (self.attrs && self.bounds) cb()
+      })
+
+      this.getBounds(function (err, bounds) {
+        // self.bounds = bounds
+        const b = self.bounds = new Rec2(bounds.posX, bounds.posY, bounds.width, bounds.height)
+        b.change(function () {
+          self.move(b.x, b.y)
+        })
+        self.bounds.size.change(function () {
+          self.resize(b.size.x, b.size.y)
+        })
+        if (self.attrs && self.bounds) cb()
+      })
+      return this
+    }
+
+    children (cb) {
+      const self = this
+      self._children = []
+      this.tree(function (err, tree) {
+        let n = tree.children.length
+
+        if (n === 0) {
+          n = 1
+          return next()
+        }
+
+        tree.children.forEach((wid) => {
+          const w = createWindow(wid).load((err) => {
+            if (err) next(err)
+            self._children.push(w)
+            next()
+          })
+        })
+
+        function next (err) {
+          if (err) {
+            n = -1
+            return cb(err)
+          }
+          if (--n) return
+          cb(null, self._children)
+        }
+      })
+      return this
+    }
+
+    onKey (mod, key, listener) {
+      kb[mod.toString('16') + '-' + key.toString(16)] = listener
+      // window, parentWindow?, modifier, key, ?, async (0 = blocking)
+      X.GrabKey(this.id, 0, mod, key, 0, 1)
+      return this
+    }
+
+    offKey (mod, key) {
+      X.GrabKey(this.id, 0, mod, key)
+      return this
+    }
+
+    focus (revert) {
+      X.SetInputFocus(this.id, revert || 1)
+      this.emit('focus')
+      return this
+    }
+
+    kill () {
+      X.KillKlient(this.id)
+      return this
+    }
+
+    close () {
+      X.DestroyWindow(this.id)
+      return this
+    }
+
+    raise  () {
+      X.RaiseWindow(this.id)
+      return this
+    }
   }
+
+  const methods = {
+    MoveWindow: 'move',
+    ResizeWindow: 'resize',
+    MapWindow: 'map',
+    UnmapWindow: 'unmap',
+    ChangeWindowAttributes: 'set',
+    QueryTree: 'tree',
+    GetWindowAttributes: 'get',
+    GetGeometry: 'getBounds',
+    ConfigureWindow: 'configure'
+  }
+
+  each(methods, function (_name, name) {
+    Window.prototype[_name] = function (...args) {
+      args.unshift(this.id)
+      return X[name].apply(X, args)
+    }
+  })
 
   function createWindow (wid) {
     if (wid != null && typeof wid !== 'number') {
@@ -36,115 +142,6 @@ module.exports = (cb) => {
     }
     all[wid] = new Window(wid)
     return all[wid]
-  }
-
-  const w = Window.prototype
-  const methods = {
-    MoveWindow: 'move',
-    ResizeWindow: 'resize',
-    MapWindow: 'map',
-    UnmapWindow: 'unmap',
-    ChangeWindowAttributes: 'set',
-    QueryTree: 'tree',
-    GetWindowAttributes: 'get',
-    GetGeometry: 'getBounds',
-    ConfigureWindow: 'configure'
-  }
-
-  each(methods, function (_name, name) {
-    w[_name] = function () {
-      const args = [].slice.call(arguments)
-      args.unshift(this.id)
-      return X[name].apply(X, args)
-    }
-  })
-
-  w.load = function (cb) {
-    const self = this
-
-    this.get(function (err, attrs) {
-      self.attrs = attrs
-      if (self.attrs && self.bounds) cb()
-    })
-
-    this.getBounds(function (err, bounds) {
-      // self.bounds = bounds
-      const b = self.bounds = new Rec2(bounds.posX, bounds.posY, bounds.width, bounds.height)
-      b.change(function () {
-        self.move(b.x, b.y)
-      })
-      self.bounds.size.change(function () {
-        self.resize(b.size.x, b.size.y)
-      })
-      if (self.attrs && self.bounds) cb()
-    })
-    return this
-  }
-
-  w.children = function (cb) {
-    const self = this
-    self._children = []
-    this.tree(function (err, tree) {
-      let n = tree.children.length
-
-      if (n === 0) {
-        n = 1
-        return next()
-      }
-
-      tree.children.forEach((wid) => {
-        const w = createWindow(wid).load((err) => {
-          if (err) next(err)
-          self._children.push(w)
-          next()
-        })
-      })
-
-      function next (err) {
-        if (err) {
-          n = -1
-          return cb(err)
-        }
-        if (--n) return
-        cb(null, self._children)
-      }
-    })
-    return this
-  }
-
-  const kb = {}
-
-  w.onKey = function (mod, key, listener) {
-    kb[mod.toString('16') + '-' + key.toString(16)] = listener
-    // window, parentWindow?, modifier, key, ?, async (0 = blocking)
-    X.GrabKey(this.id, 0, mod, key, 0, 1)
-    return this
-  }
-
-  w.offKey = function (mod, key) {
-    X.GrabKey(this.id, 0, mod, key)
-    return this
-  }
-
-  w.focus = function (revert) {
-    X.SetInputFocus(this.id, revert || 1)
-    this.emit('focus')
-    return this
-  }
-
-  w.kill = function () {
-    X.KillKlient(this.id)
-    return this
-  }
-
-  w.close = function () {
-    X.DestroyWindow(this.id)
-    return this
-  }
-
-  w.raise = function () {
-    X.RaiseWindow(this.id)
-    return this
   }
 
   let _ev
@@ -206,6 +203,6 @@ module.exports = (cb) => {
       root.emit(ev.name, ev, win)
     })
   }).on('error', (err) => {
-    log.error(err.stack)
+    log.error(err.stack || err)
   })
 }
