@@ -1,3 +1,7 @@
+* 0.5.0 - 2018-12-09
+  * Add logging
+* 0.4.0 - 2018-06-10
+  * Accept focusFollowsMouse in config
 * 0.3.6 - 2018-04-06
   * Config: take a `terminal`
 * 0.3.5 - 2018-04-06
