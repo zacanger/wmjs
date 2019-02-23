@@ -3,7 +3,6 @@
 const x11 = require('x11')
 const Layout = require('./layout')
 const u = require('./utils')
-const ease = require('vec2-easing')
 const isEmpty = require('zeelib/lib/is-empty')
 const log = require('./log')
 
@@ -11,12 +10,7 @@ const spawn = u.spawn
 
 // let X
 
-const easeConfig = {
-  easing: 20,
-  frameRate: 30
-}
-
-const config = Object.assign({}, easeConfig, u.getConfig())
+const config = u.getConfig()
 const term = config.terminal
 // const KEYS = config.keys
 
@@ -123,15 +117,6 @@ require('./xorg')((err, client) => {
   rw.on('MapRequest', (ev, win) => {
     // load the window's properties, and then lay it out.
     win.load(() => {
-      // add to current layout
-      const b = win.bounds
-      win.bounds = ease(b, config.easing, config.frameRate)
-      // eslint-disable-next-line no-proto
-      win.bounds.__proto__ = b
-      win.bounds.size = ease(b.size, config.easing, config.frameRate)
-      // eslint-disable-next-line no-proto
-      win.bounds.size.__proto__ = b.size
-
       win.configure({ borderWidth: config.borderWidth })
       win.on('focus', () => {
         if (_prevFocus) _prevFocus.set({ borderPixel: 0x0 })
