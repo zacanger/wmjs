@@ -10,7 +10,7 @@ const spawn = u.spawn
 
 // let X
 
-const config = u.getConfig()
+let config = u.getConfig()
 const term = config.terminal
 // const KEYS = config.keys
 
@@ -194,6 +194,16 @@ require('./xorg')((err, client) => {
   rw.onKey(0x40, 116, (ev) => {
     if (ev.down) cycleLayout(-1)
   })
+
+  // super-r, reload config
+  /*
+  rw.onKey(0x72, 113, (ev) => {
+    if (ev.down) {
+      config = u.getConfig()
+      log.debug('Reloaded config')
+    }
+  })
+  */
 
   // Ctrl-N
   rw.onKey(0x40, 46, (ev) => {
