@@ -1,11 +1,6 @@
 const grid = require('vec2-layout/grid')
-
 const u = require('./utils')
 const bounds = (e) => e.bounds || e
-
-const tileLayout = function () {
-  grid(this.tiles.map(bounds), this.root.bounds)
-}
 
 module.exports = class Layout {
   constructor (root) {
@@ -76,7 +71,7 @@ module.exports = class Layout {
   }
 
   layout () {
-    tileLayout.call(this)
+    grid(this.tiles.map(bounds), this.root.bounds)
   }
 
   closeAll () {

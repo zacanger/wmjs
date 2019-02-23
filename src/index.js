@@ -173,7 +173,7 @@ require('./xorg')((err, client) => {
   // super-Esc
   rw.onKey(0x40, 9, (ev) => {
     if (ev.down) {
-      if (config.log) log.debug('quiting...')
+      if (config.log) log.debug('exiting wmjs')
       // eslint-disable-next-line no-process-exit
       process.exit(0)
     }
