@@ -9,6 +9,9 @@ const warn = level('WARN')
 const info = level('INFO')
 const debug = level('DEBUG')
 
+const ensureNewline = (s = '') =>
+  (s + '\n').replace(/\n{2,}$/, '\n')
+
 const getMessage = (obj = '') =>
   (obj && (obj.stack || obj.message || obj.reason)) || obj
 
@@ -22,7 +25,7 @@ const write = (s = '') => {
   appendFile(logFile, s, (err = '') => {
     const toWrite = getMessage(err)
     if (toWrite) {
-      write(error(toWrite) + '\n')
+      write(ensureNewline(toWrite))
     }
   })
 }

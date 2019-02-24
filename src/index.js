@@ -10,6 +10,7 @@ const spawn = u.spawn
 
 // let X
 
+// eslint-disable-next-line
 let config = u.getConfig()
 const term = config.terminal
 // const KEYS = config.keys
