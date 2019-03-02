@@ -1,3 +1,5 @@
+* 0.7.0 - 2019-03-02
+  * Remove dependencies on some libraries, in prep for better layout code
 * 0.6.0 - 2019-02-23
   * Remove `vec2-easing` (prep for new layout handling code)
 * 0.5.0 - 2018-12-09
