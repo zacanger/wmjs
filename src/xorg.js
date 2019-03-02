@@ -1,7 +1,7 @@
 const EventEmitter = require('events').EventEmitter
 const x11 = require('x11')
-const Rec2 = require('rec2')
-const Vec2 = require('vec2')
+const Rec2 = require('./libs/rec2')
+const Vec2 = require('./libs/vec2')
 const each = require('zeelib/lib/each')
 const log = require('./log')
 

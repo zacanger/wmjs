@@ -1,4 +1,4 @@
-const grid = require('vec2-layout/grid')
+const grid = require('./libs/vec2-grid')
 const u = require('./utils')
 const bounds = (e) => e.bounds || e
 
