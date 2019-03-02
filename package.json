@@ -34,15 +34,12 @@
     "get-term": "1.0.3",
     "is-program-installed": "1.1.2",
     "keysym": "0.0.6",
-    "rec2": "1.2.0",
-    "vec2": "1.6.0",
-    "vec2-layout": "0.1.1",
     "x11": "2.3.0",
     "zeelib": "8.5.0"
   },
   "devDependencies": {
     "babel-eslint": "10.0.1",
-    "eslint": "5.14.1",
+    "eslint": "5.15.0",
     "eslint-config-zacanger": "3.4.2",
     "eslint-plugin-babel": "5.3.0",
     "eslint-plugin-import": "2.16.0",
