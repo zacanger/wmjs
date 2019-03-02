@@ -18,9 +18,9 @@ Lots.
 
 ## What Works
 
-* Tiling, sort of, but I wouldn't recommend opening more than three windows
-* Closing windows, but reopening them is weird
-* Launching programs (if you have `dmenu` installed, or see the config section)
+* Tiling, mostly, but the code is janky
+* Opening and closing windows
+* Launching programs, if you have `dmenu` or some other launcher (see config)
 
 ## Installation
 
@@ -80,31 +80,33 @@ a single object as an argument, with these properties:
 
 * `keys`: a map of keys in the format `keys.SUPER: keycode, keys.SPACE: keycode`, etc.
 * `run`: a wrapper for `child_process.spawn`
-* `defaults`: all defaults
+* `defaults`: all other default config properties
 
 Example:
 
 ```javascript
 const alert = require('alert-node')
 
-module.exports = ({ keys, run, defaults }) => ({
+module.exports = ({ keys, run, ...defaults }) => ({
   ...defaults,
-  modKey: keys.SUPER, // main mod key // doesn't do anything yet
   startupPrograms: [ // an array of things to spawn on start
     'xflux -z 84047',
     'dropbox-cli start',
     'compton -b'
   ],
   launcher: 'dmenu_run',
-  borderWidth: 1, // width of window borders
+  borderWidth: 1, // width of focused window borders
   borderColor: 'FFFFFF', // color for borders (hex)
+  log: true, // logs go to ~/.local/share/wmjs/wmjs.log
+  terminal: 'xterm', // terminal to spawn, see npm.im/get-term,
+  focusFollowsMouse: false, // true by default
+
+  // TODO: these don't do anything yet
+  modKey: keys.SUPER, // main mod key // doesn't do anything yet
   keybinds: { // doesn't do anything yet
     [`${keys.SUPER}+${keys.SPACE}`]: run('dmenu_run'),
     [`${keys.SUPER}+${keys.SHIFT}+${keys.RETURN}`]: alert(process.env) // whatever
   },
-  log: true, // logs go to ~/.local/share/wmjs/wmjs.log
-  terminal: 'xterm', // terminal to spawn,
-  focusFollowsMouse: false // true by default
 })
 ```
 
