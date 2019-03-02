@@ -110,7 +110,6 @@ Vec2.fromArray = function (array, ctor) {
 
 // Floating point stability
 Vec2.precision = 8
-const p = Math.pow(10, Vec2.precision)
 
 Vec2.clean = function (val) {
   if (isNaN(val)) {
@@ -125,6 +124,7 @@ Vec2.clean = function (val) {
     return val
   }
 
+  const p = Math.pow(10, Vec2.precision)
   return Math.round(val * p) / p
 }
 
