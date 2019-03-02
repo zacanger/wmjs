@@ -44,9 +44,8 @@ const relative = (xs, item, dir) => {
 }
 
 const spawn = (cmd) => {
-  const args = cmd.split(/\s+/)
-  cmd = args.shift()
-  return cp.spawn(cmd, args)
+  const [ c, ...args ] = cmd.split(/\s+/)
+  return cp.spawn(c, args)
 }
 
 // const execa = require('execa')
