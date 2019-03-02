@@ -1,7 +1,7 @@
 {
   "name": "wmjs",
   "description": "[WIP] Tiling X window manager in Node",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "author": {
     "email": "zac@zacanger.com",
     "name": "Zac Anger",
