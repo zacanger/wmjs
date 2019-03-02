@@ -17,7 +17,9 @@ const term = config.terminal
 
 // require('./xorg')(function (err, client, display) {
 require('./xorg')((err, client) => {
-  if (err) throw err
+  if (err) {
+    log.error(err)
+  }
 
   const rw = client.root
   let _prevFocus
