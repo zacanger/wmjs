@@ -89,7 +89,8 @@ Vec2.prototype = {
 
   // Calculate the length of this vector
   length: function () {
-    const x = this.x, y = this.y
+    const x = this.x
+    const y = this.y
     return Math.sqrt(x * x + y * y)
   },
 
@@ -97,15 +98,7 @@ Vec2.prototype = {
     return { x: this.x, y: this.y }
   },
 
-  toString: function () {
-    return '(' + this.x + ', ' + this.y + ')'
-  },
-
   constructor: Vec2
-}
-
-Vec2.fromArray = function (array, ctor) {
-  return new (ctor || Vec2)(array[0], array[1])
 }
 
 // Floating point stability

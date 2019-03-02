@@ -1,58 +1,6 @@
-const getTerm = require('get-term')
-const isInstalled = require('is-program-installed')
 const cp = require('child_process')
 const log = require('./log')
 // const exit = require('zeelib/lib/exit')
-const getHome = require('zeelib/lib/get-user-home')
-
-const spawn = (cmd) => {
-  const args = cmd.split(/\s+/)
-  cmd = args.shift()
-  return cp.spawn(cmd, args)
-}
-
-// const execa = require('execa')
-// execa.shellSync(`$SHELL -i -c ${command}`, opts)
-
-const exec = (cmd, opts) =>
-  cp.execSync(cmd, opts).toString('utf8').trim()
-
-const blowUp = (err) => {
-  if (!err) return
-  log.error(err.message || err)
-  // exit(err.code || 1)
-}
-
-const keys = {
-  SUPER: 133,
-  SPACE: 65,
-  RETURN: 36
-}
-
-const defaultConfig = {
-  run: spawn,
-  keys,
-  borderWidth: 1,
-  launcher: 'dmenu_run',
-  terminal: getTerm(),
-  focusFollowsMouse: true,
-  log: false
-}
-
-const stringToHex = (s = 'FFFFFF') =>
-  Number('0x' + s.replace('#', ''))
-
-const getConfig = () => {
-  const path = getHome() + '/.config/wmjs'
-  try {
-    const userConfig = require(path)(defaultConfig)
-    userConfig.borderColor = stringToHex(userConfig.borderColor)
-    return Object.assign({}, defaultConfig, userConfig)
-  } catch (_) {
-    // in the future, log here if config.debugLog
-    return defaultConfig
-  }
-}
 
 const remove = (xs, item) => {
   const i = xs.indexOf(item)
@@ -95,12 +43,27 @@ const relative = (xs, item, dir) => {
   }
 }
 
+const spawn = (cmd) => {
+  const args = cmd.split(/\s+/)
+  cmd = args.shift()
+  return cp.spawn(cmd, args)
+}
+
+// const execa = require('execa')
+// execa.shellSync(`$SHELL -i -c ${command}`, opts)
+const exec = (cmd, opts) =>
+  cp.execSync(cmd, opts).toString('utf8').trim()
+
+const blowUp = (err) => {
+  if (!err) return
+  log.error(err.message || err)
+  // exit(err.code || 1)
+}
+
 module.exports = {
   blowUp,
   exec,
   find,
-  getConfig,
-  isInstalled,
   relative,
   remove,
   spawn,

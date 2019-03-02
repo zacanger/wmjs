@@ -102,8 +102,7 @@ module.exports = ({ keys, run, defaults }) => ({
     [`${keys.SUPER}+${keys.SPACE}`]: run('dmenu_run'),
     [`${keys.SUPER}+${keys.SHIFT}+${keys.RETURN}`]: alert(process.env) // whatever
   },
-  // when truthy, logs go to `/tmp/wmjs-${DATE-TIMESTAMP}.log`
-  log: false, // by default, error and warning levels are logged. this enables info and debug.
+  log: true, // logs go to ~/.local/share/wmjs/wmjs.log
   terminal: 'xterm', // terminal to spawn,
   focusFollowsMouse: false // true by default
 })

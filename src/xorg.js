@@ -150,9 +150,7 @@ module.exports = (cb) => {
     const rid = display.screen[0].root
 
     const mouse = new Vec2(0, 0)
-    mouse.change(() => {
-      // console.log(mouse.toJSON())
-    })
+    // mouse.change(() => { // console.log(mouse.toJSON()) })
 
     setInterval(() => {
       X.QueryPointer(rid, (err, m) => {

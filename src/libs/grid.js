@@ -1,3 +1,5 @@
+// grid for ./vec2
+
 const cols = (n) => Math.ceil(Math.sqrt(n))
 
 const rows = (n) => {
@@ -26,7 +28,7 @@ module.exports = (recs, screen, order) => {
   layout(recs.length, (i, j, c, r, C) => {
     // i (cell in table)
     // j (cell in col)
-    // c (col  in table)
+    // c (col in table)
     // r (rows in col)
     // C (total cols)
     const w = screen.size.x / C

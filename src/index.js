@@ -5,13 +5,14 @@ const Layout = require('./layout')
 const u = require('./utils')
 const isEmpty = require('zeelib/lib/is-empty')
 const log = require('./log')
+const getConfig = require('./config')
 
 const spawn = u.spawn
 
 // let X
 
 // eslint-disable-next-line
-let config = u.getConfig()
+let config = getConfig()
 const term = config.terminal
 // const KEYS = config.keys
 

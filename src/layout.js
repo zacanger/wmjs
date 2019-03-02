@@ -1,4 +1,4 @@
-const grid = require('./libs/vec2-grid')
+const grid = require('./libs/grid')
 const u = require('./utils')
 const bounds = (e) => e.bounds || e
 
@@ -27,9 +27,9 @@ module.exports = class Layout {
         self.focused = win
         win.focus()
       })
-      // really, should use FocusChange here,
+      // should use FocusChange here,
       // but I don't know how to distinguish between
-      // getting and loosing focus.
+      // getting and losing focus.
       win.on('focus', () => {
         // if the window is mapped
         win.raise()
@@ -47,8 +47,7 @@ module.exports = class Layout {
       if (this.focused) this.focused.focus()
     }
     u.remove(this.tiles, win)
-    // if(!this.focused)
-    //  this.focused = this.tiles[0]
+    // if (!this.focused) this.focused = this.tiles[0]
     this.layout()
   }
 
@@ -64,7 +63,7 @@ module.exports = class Layout {
     if (!this.focused) this.focused = this.tiles[0].focus()
     const _focused = u.relative(this.tiles, this.focused, dir)
     u.swap(this.tiles, this.focused, _focused)
-    //    focused = _focused.focus()
+    // focused = _focused.focus()
     this.layout()
 
     return this
@@ -80,11 +79,10 @@ module.exports = class Layout {
     })
   }
 
-  // hide all windows.
   hide () {
     this.tiles.forEach((e) => { e.unmap() })
   }
-  // show all windows
+
   show () {
     this.tiles.forEach((e) => { e.map() })
   }

@@ -1,3 +1,5 @@
+* 0.7.1 - 2019-03-02
+  * Logging on by default, plus timestamps
 * 0.7.0 - 2019-03-02
   * Remove dependencies on some libraries, in prep for better layout code
 * 0.6.0 - 2019-02-23

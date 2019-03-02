@@ -3,7 +3,8 @@ const { appendFile, existsSync, mkdirSync } = require('fs')
 const logPath = home() + '/.local/share/wmjs'
 const logFile = logPath + '/wmjs.log'
 
-const level = (prefix) => (msg) => `${prefix}: ${msg}`
+const getDateString = () => new Date().toJSON()
+const level = (prefix) => (msg) => `${prefix}: ${getDateString()}: ${msg}`
 const error = level('ERROR')
 const warn = level('WARN')
 const info = level('INFO')
