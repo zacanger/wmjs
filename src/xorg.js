@@ -156,6 +156,9 @@ module.exports = (cb) => {
 
     setInterval(() => {
       X.QueryPointer(rid, (err, m) => {
+        if (err) {
+          log.error(err)
+        }
         mouse.set(m.rootX, m.rootY)
       })
     }, 200)

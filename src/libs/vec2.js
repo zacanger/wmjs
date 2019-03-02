@@ -1,456 +1,131 @@
-;(function inject (clean, precision) {
-  function Vec2 (x, y) {
-    if (!(this instanceof Vec2)) {
-      return new Vec2(x, y)
+function Vec2 (x, y) {
+  if (!(this instanceof Vec2)) {
+    return new Vec2(x, y)
+  }
+
+  if (Array.isArray(x)) {
+    y = x[1]
+    x = x[0]
+  } else if (x && typeof x === 'object') {
+    y = x.y
+    x = x.x
+  }
+
+  this.x = Vec2.clean(x || 0)
+  this.y = Vec2.clean(y || 0)
+}
+
+Vec2.prototype = {
+  change: function (fn) {
+    if (typeof fn === 'function') {
+      if (this.observers) {
+        this.observers.push(fn)
+      } else {
+        this.observers = [ fn ]
+      }
+    } else if (this.observers && this.observers.length) {
+      for (let i = this.observers.length - 1; i >= 0; i--) {
+        this.observers[i](this, fn)
+      }
     }
 
-    if (Array.isArray(x)) {
-      y = x[1]
-      x = x[0]
-    } else if (x && typeof x === 'object') {
+    return this
+  },
+
+  // set x and y
+  set: function (x, y, notify) {
+    if (typeof x !== 'number') {
+      notify = y
       y = x.y
       x = x.x
     }
 
-    this.x = Vec2.clean(x || 0)
-    this.y = Vec2.clean(y || 0)
-  }
-
-  Vec2.prototype = {
-    change: function (fn) {
-      if (typeof fn === 'function') {
-        if (this.observers) {
-          this.observers.push(fn)
-        } else {
-          this.observers = [ fn ]
-        }
-      } else if (this.observers && this.observers.length) {
-        for (let i = this.observers.length - 1; i >= 0; i--) {
-          this.observers[i](this, fn)
-        }
-      }
-
+    if (this.x === x && this.y === y) {
       return this
-    },
+    }
 
-    ignore: function (fn) {
-      if (this.observers) {
-        if (!fn) {
-          this.observers = []
-        } else {
-          const o = this.observers
-          let l = o.length
-          while (l--) {
-            o[l] === fn && o.splice(l, 1)
-          }
-        }
-      }
-      return this
-    },
+    let orig = null
+    if (notify !== false && this.observers && this.observers.length) {
+      orig = this.clone()
+    }
 
-    // set x and y
-    set: function (x, y, notify) {
-      if (typeof x !== 'number') {
-        notify = y
+    this.x = Vec2.clean(x)
+    this.y = Vec2.clean(y)
+
+    if (notify !== false) {
+      return this.change(orig)
+    }
+  },
+
+  // return a new vector with the same component values
+  // as this one
+  clone: function () {
+    return new (this.constructor)(this.x, this.y)
+  },
+
+  // Add the incoming `vec2` vector to this vector
+  add: function (x, y, returnNew) {
+    if (typeof x !== 'number') {
+      returnNew = y
+      if (Array.isArray(x)) {
+        y = x[1]
+        x = x[0]
+      } else {
         y = x.y
         x = x.x
       }
-
-      if (this.x === x && this.y === y) {
-        return this
-      }
-
-      let orig = null
-      if (notify !== false && this.observers && this.observers.length) {
-        orig = this.clone()
-      }
-
-      this.x = Vec2.clean(x)
-      this.y = Vec2.clean(y)
-
-      if (notify !== false) {
-        return this.change(orig)
-      }
-    },
-
-    // reset x and y to zero
-    zero: function () {
-      return this.set(0, 0)
-    },
-
-    // return a new vector with the same component values
-    // as this one
-    clone: function () {
-      return new (this.constructor)(this.x, this.y)
-    },
-
-    // negate the values of this vector
-    negate: function (returnNew) {
-      if (returnNew) {
-        return new (this.constructor)(-this.x, -this.y)
-      } else {
-        return this.set(-this.x, -this.y)
-      }
-    },
-
-    // Add the incoming `vec2` vector to this vector
-    add: function (x, y, returnNew) {
-      if (typeof x !== 'number') {
-        returnNew = y
-        if (Array.isArray(x)) {
-          y = x[1]
-          x = x[0]
-        } else {
-          y = x.y
-          x = x.x
-        }
-      }
-
-      x += this.x
-      y += this.y
-
-      if (!returnNew) {
-        return this.set(x, y)
-      } else {
-        // Return a new vector if `returnNew` is truthy
-        return new (this.constructor)(x, y)
-      }
-    },
-
-    // Subtract the incoming `vec2` from this vector
-    subtract: function (x, y, returnNew) {
-      if (typeof x !== 'number') {
-        returnNew = y
-        if (Array.isArray(x)) {
-          y = x[1]
-          x = x[0]
-        } else {
-          y = x.y
-          x = x.x
-        }
-      }
-
-      x = this.x - x
-      y = this.y - y
-
-      if (!returnNew) {
-        return this.set(x, y)
-      } else {
-        // Return a new vector if `returnNew` is truthy
-        return new (this.constructor)(x, y)
-      }
-    },
-
-    // Multiply this vector by the incoming `vec2`
-    multiply: function (x, y, returnNew) {
-      if (typeof x !== 'number') {
-        returnNew = y
-        if (Array.isArray(x)) {
-          y = x[1]
-          x = x[0]
-        } else {
-          y = x.y
-          x = x.x
-        }
-      } else if (typeof y !== 'number') {
-        returnNew = y
-        y = x
-      }
-
-      x *= this.x
-      y *= this.y
-
-      if (!returnNew) {
-        return this.set(x, y)
-      } else {
-        return new (this.constructor)(x, y)
-      }
-    },
-
-    // Rotate this vector. Accepts a `Rotation` or angle in radians.
-    //
-    // Passing a truthy `inverse` will cause the rotation to
-    // be reversed.
-    //
-    // If `returnNew` is truthy, a new
-    // `Vec2` will be created with the values resulting from
-    // the rotation. Otherwise the rotation will be applied
-    // to this vector directly, and this vector will be returned.
-    rotate: function (r, inverse, returnNew) {
-      const x = this.x
-      const y = this.y
-      const cos = Math.cos(r)
-      const sin = Math.sin(r)
-
-      inverse = (inverse) ? -1 : 1
-
-      const rx = cos * x - (inverse * sin) * y
-      const ry = (inverse * sin) * x + cos * y
-
-      if (returnNew) {
-        return new (this.constructor)(rx, ry)
-      } else {
-        return this.set(rx, ry)
-      }
-    },
-
-    // Calculate the length of this vector
-    length: function () {
-      const x = this.x, y = this.y
-      return Math.sqrt(x * x + y * y)
-    },
-
-    // Get the length squared. For performance, use this instead of `Vec2#length` (if possible).
-    lengthSquared: function () {
-      const x = this.x, y = this.y
-      return x * x + y * y
-    },
-
-    // Return the distance betwen this `Vec2` and the incoming vec2 vector
-    // and return a scalar
-    distance: function (vec2) {
-      const x = this.x - vec2.x
-      const y = this.y - vec2.y
-      return Math.sqrt(x * x + y * y)
-    },
-
-    // Given Array of Vec2, find closest to this Vec2.
-    nearest: function (others) {
-      let shortestDistance = Number.MAX_VALUE
-      let nearest = null
-      let currentDistance
-
-      for (let i = others.length - 1; i >= 0; i--) {
-        currentDistance = this.distance(others[i])
-        if (currentDistance <= shortestDistance) {
-          shortestDistance = currentDistance
-          nearest = others[i]
-        }
-      }
-
-      return nearest
-    },
-
-    // Convert this vector into a unit vector.
-    // Returns the length.
-    normalize: function (returnNew) {
-      const length = this.length()
-
-      // Collect a ratio to shrink the x and y coords
-      const invertedLength = (length < Number.MIN_VALUE) ? 0 : 1 / length
-
-      if (!returnNew) {
-        // Convert the coords to be greater than zero
-        // but smaller than or equal to 1.0
-        return this.set(this.x * invertedLength, this.y * invertedLength)
-      } else {
-        return new (this.constructor)(this.x * invertedLength, this.y * invertedLength)
-      }
-    },
-
-    // Determine if another `Vec2`'s components match this one's
-    // also accepts 2 scalars
-    equal: function (v, w) {
-      if (typeof v !== 'number') {
-        if (Array.isArray(v)) {
-          w = v[1]
-          v = v[0]
-        } else {
-          w = v.y
-          v = v.x
-        }
-      }
-
-      return (Vec2.clean(v) === this.x && Vec2.clean(w) === this.y)
-    },
-
-    // Return a new `Vec2` that contains the absolute value of
-    // each of this vector's parts
-    abs: function (returnNew) {
-      const x = Math.abs(this.x), y = Math.abs(this.y)
-
-      if (returnNew) {
-        return new (this.constructor)(x, y)
-      } else {
-        return this.set(x, y)
-      }
-    },
-
-    // Return a new `Vec2` consisting of the smallest values
-    // from this vector and the incoming
-    //
-    // When returnNew is truthy, a new `Vec2` will be returned
-    // otherwise the minimum values in either this or `v` will
-    // be applied to this vector.
-    min: function (v, returnNew) {
-      const tx = this.x
-      const ty = this.y
-      const vx = v.x
-      const vy = v.y
-      const x = tx < vx ? tx : vx
-      const y = ty < vy ? ty : vy
-
-      if (returnNew) {
-        return new (this.constructor)(x, y)
-      } else {
-        return this.set(x, y)
-      }
-    },
-
-    // Return a new `Vec2` consisting of the largest values
-    // from this vector and the incoming
-    //
-    // When returnNew is truthy, a new `Vec2` will be returned
-    // otherwise the minimum values in either this or `v` will
-    // be applied to this vector.
-    max: function (v, returnNew) {
-      const tx = this.x
-      const ty = this.y
-      const vx = v.x
-      const vy = v.y
-      const x = tx > vx ? tx : vx
-      const y = ty > vy ? ty : vy
-
-      if (returnNew) {
-        return new (this.constructor)(x, y)
-      } else {
-        return this.set(x, y)
-      }
-    },
-
-    // Clamp values into a range.
-    // If this vector's values are lower than the `low`'s
-    // values, then raise them.  If they are higher than
-    // `high`'s then lower them.
-    //
-    // Passing returnNew as true will cause a new Vec2 to be
-    // returned.  Otherwise, this vector's values will be clamped
-    clamp: function (low, high, returnNew) {
-      const ret = this.min(high, true).max(low)
-      if (returnNew) {
-        return ret
-      } else {
-        return this.set(ret.x, ret.y)
-      }
-    },
-
-    // Perform linear interpolation between two vectors
-    // amount is a decimal between 0 and 1
-    lerp: function (vec, amount, returnNew) {
-      return this.add(vec.subtract(this, true).multiply(amount), returnNew)
-    },
-
-    // Get the skew vector such that dot(skew_vec, other) == cross(vec, other)
-    skew: function (returnNew) {
-      if (!returnNew) {
-        return this.set(-this.y, this.x)
-      } else {
-        return new (this.constructor)(-this.y, this.x)
-      }
-    },
-
-    // calculate the dot product between
-    // this vector and the incoming
-    dot: function (b) {
-      return Vec2.clean(this.x * b.x + b.y * this.y)
-    },
-
-    // calculate the perpendicular dot product between
-    // this vector and the incoming
-    perpDot: function (b) {
-      return Vec2.clean(this.x * b.y - this.y * b.x)
-    },
-
-    // Determine the angle between two vec2s
-    angleTo: function (vec) {
-      return Math.atan2(this.perpDot(vec), this.dot(vec))
-    },
-
-    // Divide this vector's components by a scalar
-    divide: function (x, y, returnNew) {
-      if (typeof x !== 'number') {
-        returnNew = y
-        if (Array.isArray(x)) {
-          y = x[1]
-          x = x[0]
-        } else {
-          y = x.y
-          x = x.x
-        }
-      } else if (typeof y !== 'number') {
-        returnNew = y
-        y = x
-      }
-
-      if (x === 0 || y === 0) {
-        throw new Error('division by zero')
-      }
-
-      if (isNaN(x) || isNaN(y)) {
-        throw new TypeError('NaN detected')
-      }
-
-      if (returnNew) {
-        return new (this.constructor)(this.x / x, this.y / y)
-      }
-
-      return this.set(this.x / x, this.y / y)
-    },
-
-    isPointOnLine: function (start, end) {
-      return (start.y - this.y) * (start.x - end.x) ===
-             (start.y - end.y) * (start.x - this.x)
-    },
-
-    toArray: function () {
-      return [ this.x, this.y ]
-    },
-
-    fromArray: function (array) {
-      return this.set(array[0], array[1])
-    },
-    toJSON: function () {
-      return { x: this.x, y: this.y }
-    },
-    toString: function () {
-      return '(' + this.x + ', ' + this.y + ')'
-    },
-    constructor: Vec2
-  }
-
-  Vec2.fromArray = function (array, ctor) {
-    return new (ctor || Vec2)(array[0], array[1])
-  }
-
-  // Floating point stability
-  Vec2.precision = precision || 8
-  const p = Math.pow(10, Vec2.precision)
-
-  Vec2.clean = clean || function (val) {
-    if (isNaN(val)) {
-      throw new TypeError('NaN detected')
     }
 
-    if (!isFinite(val)) {
-      throw new TypeError('Infinity detected')
-    }
+    x += this.x
+    y += this.y
 
-    if (Math.round(val) === val) {
-      return val
+    if (!returnNew) {
+      return this.set(x, y)
+    } else {
+      // Return a new vector if `returnNew` is truthy
+      return new (this.constructor)(x, y)
     }
+  },
 
-    return Math.round(val * p) / p
+  // Calculate the length of this vector
+  length: function () {
+    const x = this.x, y = this.y
+    return Math.sqrt(x * x + y * y)
+  },
+
+  toJSON: function () {
+    return { x: this.x, y: this.y }
+  },
+
+  toString: function () {
+    return '(' + this.x + ', ' + this.y + ')'
+  },
+
+  constructor: Vec2
+}
+
+Vec2.fromArray = function (array, ctor) {
+  return new (ctor || Vec2)(array[0], array[1])
+}
+
+// Floating point stability
+Vec2.precision = 8
+const p = Math.pow(10, Vec2.precision)
+
+Vec2.clean = function (val) {
+  if (isNaN(val)) {
+    throw new TypeError('NaN detected')
   }
 
-  Vec2.inject = inject
-
-  if (!clean) {
-    Vec2.fast = inject((k) => k)
-
-    // Expose, but also allow creating a fresh Vec2 subclass.
-    if (typeof module !== 'undefined' && typeof module.exports === 'object') {
-      module.exports = Vec2
-    }
+  if (!isFinite(val)) {
+    throw new TypeError('Infinity detected')
   }
-  return Vec2
-})()
+
+  if (Math.round(val) === val) {
+    return val
+  }
+
+  return Math.round(val * p) / p
+}
+
+module.exports = Vec2
