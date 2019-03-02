@@ -66,6 +66,17 @@ below).
 
 ## Configuration
 
+#### Keybinds
+
+Current keybinds:
+
+```
+SUPER+SPACE: dmenu_run (or launcher, see config)
+SUPER+RETURN: terminal (see config)
+SUPER+ARROWS: select tiles
+SUPER+SHIFT+ARROWS: move tiles
+```
+
 `wmjs` can use an optional config file. This should be resolvable under
 `~/.config/wmjs`. Since it should be a module, that means you could have any of
 the following:
@@ -143,18 +154,12 @@ Pretty much everything.
     * There's code for this now, but it's not mapped to anything real I think?
 * Automatically install xsession file, add to alternatives (Debian), and install icon
 * Properly set wmname (NETWM, see EWMH/wm-spec)
+* Keybinds: arrows -> hjkl
 
 #### Config Things
 
 All default keybinds should rely on modKey (which we'll default to SUPER, which
 is the Windows key on many keyboards). We should keep default keybinds minimal.
-
-```
-MODKEY+SPACE: dmenu_run
-MODKEY+RETURN: x-terminal-emulator
-MODKEY+ARROWS: snap to corner (quarter of screen)
-MODKEY+SHIFT+ARROWS: snap to halves of screen
-```
 
 Configs should be hot reloaded (shouldn't need to restart the WM to reload
 config).
