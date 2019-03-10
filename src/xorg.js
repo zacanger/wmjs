@@ -152,6 +152,28 @@ module.exports = (cb) => {
     const mouse = new Vec2(0, 0)
     // mouse.change(() => { // console.log(mouse.toJSON()) })
 
+    // testing new keybinding code
+    const min = display.min_keycode
+    const max = display.max_keycode
+    const chr2Data = []
+    const key2Data = []
+    // The keySyms is a hash of mnemonic char names, associated to an integer
+    // charcode and its description.
+    for (const codeName in x11.keySyms) {
+      const keyData = x11.keySyms[codeName]
+      chr2Data[keyData.code] = { codeName: codeName, description: keyData.description }
+    }
+    // Get the local key mapping to build key2Data.
+    display.client.GetKeyboardMapping(min, max - min, (err, list) => {
+      for (let i = 0; i < list.length; ++i) {
+        const name = key2Data[i + min] = []
+        const sublist = list[i]
+        for (let j = 0; j < sublist.length; ++j) {
+          name.push(chr2Data[sublist[j]])
+        }
+      }
+    })
+
     setInterval(() => {
       X.QueryPointer(rid, (err, m) => {
         if (err) {
@@ -178,6 +200,8 @@ module.exports = (cb) => {
       const win = wid ? createWindow(wid) : undefined
 
       if (ev.name === 'KeyPress' || ev.name === 'KeyRelease') {
+        // TESTING
+        // console.log(key2Data[ev.keycode])
         const listener = kb[ev.buttons.toString(16) + '-' + ev.keycode.toString(16)]
         ev.down = ev.name === 'KeyPress'
         ev.up = !ev.down
