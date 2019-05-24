@@ -98,6 +98,9 @@ require('./xorg')((err, client) => {
   */
 
   rw.children((err, children) => {
+    if (err) {
+      log.error(err)
+    }
     children.forEach((win) => {
       win.kill()
       l.remove(win)

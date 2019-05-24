@@ -26,11 +26,19 @@ module.exports = (cb) => {
       const self = this
 
       this.get(function (err, attrs) {
+        if (err) {
+          log.error(err)
+        }
+
         self.attrs = attrs
         if (self.attrs && self.bounds) cb()
       })
 
       this.getBounds(function (err, bounds) {
+        if (err) {
+          log.error(err)
+        }
+
         // self.bounds = bounds
         const b = self.bounds = new Rec2(bounds.posX, bounds.posY, bounds.width, bounds.height)
         b.change(function () {
@@ -48,6 +56,10 @@ module.exports = (cb) => {
       const self = this
       self._children = []
       this.tree(function (err, tree) {
+        if (err) {
+          log.error(err)
+        }
+
         let n = tree.children.length
 
         if (n === 0) {
@@ -103,7 +115,7 @@ module.exports = (cb) => {
       return this
     }
 
-    raise  () {
+    raise () {
       X.RaiseWindow(this.id)
       return this
     }
@@ -165,6 +177,9 @@ module.exports = (cb) => {
     }
     // Get the local key mapping to build key2Data.
     display.client.GetKeyboardMapping(min, max - min, (err, list) => {
+      if (err) {
+        log.error(err)
+      }
       for (let i = 0; i < list.length; ++i) {
         const name = key2Data[i + min] = []
         const sublist = list[i]
