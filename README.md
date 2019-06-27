@@ -25,7 +25,7 @@ Lots.
 
 ## Installation
 
-`npm i -g wmjs`
+[Get Node](https://nodejs.org/en/about/releases/), then `npm i -g wmjs`
 
 ## Usage
 
