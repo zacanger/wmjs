@@ -1,7 +1,0 @@
-{
-  "root": true,
-  "extends": "eslint-config-zacanger",
-  "rules": {
-    "func-style": 0
-  }
-}
