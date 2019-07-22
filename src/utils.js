@@ -1,6 +1,5 @@
 const cp = require('child_process')
 const log = require('./log')
-// const exit = require('zeelib/lib/exit')
 
 const remove = (xs, item) => {
   const i = xs.indexOf(item)
@@ -44,7 +43,7 @@ const relative = (xs, item, dir) => {
 }
 
 const spawn = (cmd) => {
-  const [ c, ...args ] = cmd.split(/\s+/)
+  const [c, ...args] = cmd.split(/\s+/)
   return cp.spawn(c, args)
 }
 
@@ -56,7 +55,7 @@ const exec = (cmd, opts) =>
 const blowUp = (err) => {
   if (!err) return
   log.error(err.message || err)
-  // exit(err.code || 1)
+  // process.exit(err.code || 1)
 }
 
 module.exports = {

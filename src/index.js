@@ -3,7 +3,6 @@
 const x11 = require('x11')
 const Layout = require('./layout')
 const u = require('./utils')
-const isEmpty = require('zeelib/lib/is-empty')
 const log = require('./log')
 const getConfig = require('./config')
 
@@ -25,7 +24,7 @@ require('./xorg')((err, client) => {
   const rw = client.root
   let _prevFocus
   const mouse = client.mouse
-  const layouts = [ new Layout(rw) ]
+  const layouts = [new Layout(rw)]
 
   let l = layouts[0]
 
@@ -108,18 +107,16 @@ require('./xorg')((err, client) => {
     l.layout()
   })
 
-  if (!isEmpty(config.startupPrograms)) {
-    config.startupPrograms.forEach((program) => {
-      try {
-        const prg = spawn(program)
-        prg.on('error', (err) => {
-          log.error(err.message || err)
-        })
-      } catch (e) {
-        log.error(e)
-      }
-    })
-  }
+  config.startupPrograms.forEach((program) => {
+    try {
+      const prg = spawn(program)
+      prg.on('error', (err) => {
+        log.error(err.message || err)
+      })
+    } catch (e) {
+      log.error(e)
+    }
+  })
 
   rw.on('MapRequest', (ev, win) => {
     // load the window's properties, and then lay it out.

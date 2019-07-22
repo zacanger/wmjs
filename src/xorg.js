@@ -2,7 +2,6 @@ const EventEmitter = require('events').EventEmitter
 const x11 = require('x11')
 const Rec2 = require('./libs/rec2')
 const Vec2 = require('./libs/vec2')
-const each = require('zeelib/lib/each')
 const log = require('./log')
 
 module.exports = (cb) => {
@@ -133,10 +132,10 @@ module.exports = (cb) => {
     ConfigureWindow: 'configure'
   }
 
-  each(methods, function (_name, name) {
-    Window.prototype[_name] = function (...args) {
+  Object.keys(methods).forEach((m) => {
+    Window.prototype[methods[m]] = function (...args) {
       args.unshift(this.id)
-      return X[name].apply(X, args)
+      return X[m].apply(X, args)
     }
   })
 

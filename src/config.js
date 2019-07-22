@@ -1,5 +1,5 @@
 const getTerm = require('get-term')
-const getHome = require('zeelib/lib/get-user-home')
+const getHome = require('zeelib/lib/get-user-home').default
 const utils = require('./utils')
 const log = require('./log')
 

@@ -21,7 +21,7 @@ Vec2.prototype = {
       if (this.observers) {
         this.observers.push(fn)
       } else {
-        this.observers = [ fn ]
+        this.observers = [fn]
       }
     } else if (this.observers && this.observers.length) {
       for (let i = this.observers.length - 1; i >= 0; i--) {

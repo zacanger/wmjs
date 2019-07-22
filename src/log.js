@@ -1,4 +1,4 @@
-const home = require('zeelib/lib/get-user-home')
+const home = require('zeelib/lib/get-user-home').default
 const { appendFile, existsSync, mkdirSync } = require('fs')
 const logPath = home() + '/.local/share/wmjs'
 const logFile = logPath + '/wmjs.log'
