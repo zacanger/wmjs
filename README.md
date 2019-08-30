@@ -150,6 +150,4 @@ wmjs is heavily based on code from the following projects:
 * Inspiration from [i3](https://i3wm.org),
   [catwm](https://github.com/pyknite/catwm), and tons of other awesome projects.
 
-## License
-
-[MIT](./LICENSE.md)
+[LICENSE](./LICENSE.md)
