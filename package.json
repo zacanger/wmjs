@@ -31,15 +31,15 @@
     "x11"
   ],
   "dependencies": {
-    "get-term": "1.0.8",
-    "is-program-installed": "1.1.5",
+    "get-term": "2.0.1",
+    "is-program-installed": "2.0.0",
     "keysym": "0.0.6",
     "x11": "2.3.0",
-    "zeelib": "10.0.5"
+    "zeelib": "11.0.0"
   },
   "devDependencies": {
-    "sortpack": "1.2.1",
-    "standard": "14.0.2"
+    "sortpack": "2.0.0",
+    "standard": "14.1.0"
   },
   "engines": {
     "node": ">=8.0.0"
