@@ -172,7 +172,7 @@ module.exports = (cb) => {
     // charcode and its description.
     for (const codeName in x11.keySyms) {
       const keyData = x11.keySyms[codeName]
-      chr2Data[keyData.code] = { codeName: codeName, description: keyData.description }
+      chr2Data[keyData.code] = { codeName, description: keyData.description }
     }
     // Get the local key mapping to build key2Data.
     display.client.GetKeyboardMapping(min, max - min, (err, list) => {

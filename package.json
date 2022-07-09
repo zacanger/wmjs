@@ -7,7 +7,7 @@
     "name": "Zac Anger",
     "url": "http://zacanger.com"
   },
-  "license": "LGPL-3.0",
+  "license": "MIT",
   "main": "index.js",
   "bin": "./index.js",
   "scripts": {
@@ -31,17 +31,17 @@
     "x11"
   ],
   "dependencies": {
-    "get-term": "2.0.1",
-    "is-program-installed": "2.0.0",
+    "get-term": "2.1.0",
+    "is-program-installed": "2.3.4",
     "keysym": "0.0.6",
     "x11": "2.3.0",
-    "zeelib": "11.0.0"
+    "zeelib": "11.2.0"
   },
   "devDependencies": {
-    "sortpack": "2.0.0",
-    "standard": "14.1.0"
+    "sortpack": "2.3.0",
+    "standard": "17.0.0"
   },
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=16.0.0"
   }
 }
