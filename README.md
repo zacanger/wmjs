@@ -1,5 +1,12 @@
 # wmjs
 
+## ABANDONED
+
+I'm no longer regularly working on Linux. This project is abandoned. Please feel
+free to fork it and continue the project!
+
+----
+
 ![logo](/logo.png?raw=true)
 
 **[WIP]** only use this if you are very brave and don't need to get anything done.
